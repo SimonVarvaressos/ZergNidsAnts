@@ -1,0 +1,11 @@
+import jade.core.Agent;
+import jade.core.AID;
+
+public class Worker extends Agent{
+
+	Worker()
+	{
+		
+	}
+	
+}
