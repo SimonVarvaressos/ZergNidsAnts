@@ -4,7 +4,7 @@ public class Unit extends Agent {
 	
 	Unit()
 	{
-		super();
+		
 	}
 
 }

@@ -5,7 +5,7 @@ public class Agent extends Thread{
 	
 	Agent()
 	{
-		isAlive = true;
+		
 	}
 	
 	public void run()

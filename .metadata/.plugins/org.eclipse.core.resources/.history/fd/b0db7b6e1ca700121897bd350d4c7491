@@ -1,0 +1,13 @@
+
+public class Agent extends Thread{
+
+	Agent()
+	{
+		
+	}
+	
+	run()
+	{
+		
+	}
+}
