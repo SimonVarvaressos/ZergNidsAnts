@@ -1,0 +1,12 @@
+
+public class Vector2 {
+
+	private float x;
+	private float y;
+	
+	Vector2()
+	{
+		x = 0.0f;
+		y = 0.0f;
+	}
+}
