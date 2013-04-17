@@ -1,9 +1,4 @@
 
 public class Terranide extends Unit{
-	
-	Terranide()
-	{
-		
-	}
 
 }

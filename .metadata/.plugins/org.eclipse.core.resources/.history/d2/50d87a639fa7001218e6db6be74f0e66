@@ -7,7 +7,6 @@ public class Agent extends Thread{
 	{
 		isAlive = true;
 		System.out.print("Started");
-		start();
 	}
 	
 	public void run()
