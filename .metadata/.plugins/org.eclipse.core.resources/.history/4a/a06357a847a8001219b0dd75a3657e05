@@ -27,6 +27,11 @@ public class Swarmling extends Unit{
 	}
 
 	@Override
+	protected void sendMessage(Message m) {
+		boss.receiveMessage(m);
+	}
+
+	@Override
 	protected void receiveMessage(Message m) {
 		boiteMessages.add(m);
 		

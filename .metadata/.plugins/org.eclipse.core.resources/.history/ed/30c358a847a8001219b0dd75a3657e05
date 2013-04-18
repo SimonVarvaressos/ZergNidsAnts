@@ -61,6 +61,12 @@ public class Swarmide extends Unit{
 	}
 
 	@Override
+	protected void sendMessage(Message m) {
+		
+		
+	}
+
+	@Override
 	protected void receiveMessage(Message m) {
 		// TODO Auto-generated method stub
 		

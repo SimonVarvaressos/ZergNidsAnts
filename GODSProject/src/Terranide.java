@@ -18,11 +18,6 @@ public class Terranide extends Unit{
 		
 	}
 
-	@Override
-	protected void sendMessage(Message m) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	protected void receiveMessage(Message m) {

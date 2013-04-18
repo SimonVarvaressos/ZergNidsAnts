@@ -33,6 +33,7 @@ public abstract class Agent extends Thread{
 	
 	protected abstract void checkMessages();
 	protected abstract void act();
+	protected abstract void sendMessage(Message m);
 	protected abstract void receiveMessage(Message m);
 	
 	

@@ -13,14 +13,6 @@ public class Overmind extends Unit{
 		unitType = "Overmind";
 	}
 	
-	public boolean canProduceSwarmodons()
-	{
-		if (children.size() < 5)
-			return true;
-		else
-			return false;
-	}
-	
 	protected void checkMessages()
 	{
 		
