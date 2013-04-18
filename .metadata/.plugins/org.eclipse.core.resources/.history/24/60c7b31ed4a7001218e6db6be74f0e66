@@ -1,0 +1,19 @@
+
+enum TypeMessage
+{
+	Attaquez,
+	Revenir,
+	Détection,
+	Pillez
+}
+
+public class Message {
+
+	public TypeMessage type;
+	public Vector2 position;
+	
+	Message()
+	{
+		
+	}
+}

@@ -1,0 +1,17 @@
+public class Unit extends Agent {
+
+	protected Vector2 position;
+	protected float speed;
+	protected float life;
+	
+	Unit()
+	{
+		super();
+	}
+	
+	protected void move(Vector2 direction)
+	{
+		Vector2 movement = new Vector2();
+	}
+
+}

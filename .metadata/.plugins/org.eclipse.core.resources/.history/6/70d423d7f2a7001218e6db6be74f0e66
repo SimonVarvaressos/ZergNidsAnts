@@ -1,0 +1,38 @@
+import java.util.Vector;
+
+
+public class Overmind extends Unit{
+	
+	protected float energy;
+	protected 
+	
+	Overmind()
+	{
+		super();
+		unitType = "Overmind";
+	}
+	
+	protected void checkMessages()
+	{
+		
+	}
+
+	@Override
+	protected void act() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void sendMessage(Message m) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void receiveMessage(Message m) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

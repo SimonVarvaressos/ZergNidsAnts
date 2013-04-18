@@ -1,0 +1,34 @@
+import java.util.concurrent.BlockingQueue;
+
+
+public abstract class Agent extends Thread{
+
+	protected boolean isAlive;
+	protected BlockingQueue<Message> boiteMessages;
+	
+	Agent()
+	{
+		isAlive = true;
+		System.out.print("Started");
+		start();
+	}
+	
+	public void run()
+	{
+		try {
+			while (isAlive)
+			{
+				
+				Thread.sleep(500);
+			}
+			
+		} catch (InterruptedException e) {
+			System.out.println("Interrupted");
+		}
+	}
+	
+	protected abstract void checkMessages();
+	protected abstract void act();
+	
+	
+}

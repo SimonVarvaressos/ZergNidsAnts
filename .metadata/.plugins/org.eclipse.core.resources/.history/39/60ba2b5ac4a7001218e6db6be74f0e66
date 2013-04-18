@@ -1,0 +1,11 @@
+
+public class Overmind extends Unit{
+	
+	protected float energy;
+	
+	Overmind()
+	{
+		
+	}
+
+}

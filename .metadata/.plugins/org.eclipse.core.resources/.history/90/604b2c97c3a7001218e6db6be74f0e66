@@ -1,0 +1,12 @@
+
+enum TypeMessage
+{
+	Attaquez,
+	Revenir,
+	Détection,
+	Pillez
+}
+
+public class Message {
+
+}

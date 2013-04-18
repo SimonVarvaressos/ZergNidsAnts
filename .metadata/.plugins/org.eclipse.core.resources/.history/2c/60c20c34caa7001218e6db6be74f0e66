@@ -1,0 +1,13 @@
+import java.util.Vector;
+
+public class Swarmide extends Unit{
+	
+	private Swarmodon boss;
+	private Vector<Swarmling> children;
+	
+	Swarmide()
+	{
+		super();
+	}
+
+}

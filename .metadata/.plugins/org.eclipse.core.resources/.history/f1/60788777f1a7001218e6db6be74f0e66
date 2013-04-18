@@ -1,0 +1,24 @@
+
+enum TypeMessage
+{
+	Attack,
+	GoTo,
+	Detect,
+	Loot,
+	Detected
+	
+}
+
+public class Message {
+
+	public TypeMessage type;
+	public Vector2 position;
+	public Unit destinataire;
+	
+	Message(TypeMessage t, Vector2 pos, Unit dest)
+	{
+		type = t;
+		position = pos;
+		destinataire = dest;
+	}
+}

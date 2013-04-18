@@ -1,0 +1,46 @@
+import java.util.Vector;
+
+public class Swarmide extends Unit{
+	
+	private Swarmodon boss;
+	private Vector<Swarmling> children;
+	
+	Swarmide()
+	{
+		super();
+		children = new Vector<Swarmling>();
+	}
+	
+	public boolean canProduceSwarmlings()
+	{
+		if (children.size() < 5)
+			return true;
+		else
+			return false;
+	}
+
+	@Override
+	protected void checkMessages() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void act() {
+		System.out.println("Swarmide");
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	protected void sendMessage() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,6 +1,39 @@
+import java.util.Vector;
 
-public class Overmind {
+
+public class Overmind extends Unit{
 	
 	protected float energy;
+	protected Vector<Swarmodon> children;
+	
+	Overmind()
+	{
+		super();
+		children = new Vector<Swarmodon>();
+		unitType = "Overmind";
+	}
+	
+	protected void checkMessages()
+	{
+		
+	}
+
+	@Override
+	protected void act() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void sendMessage(Message m) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void receiveMessage(Message m) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

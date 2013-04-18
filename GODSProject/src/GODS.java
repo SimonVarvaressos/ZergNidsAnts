@@ -16,6 +16,7 @@ public class GODS {
 				try {
 					GODS window = new GODS();
 					window.frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -27,7 +28,15 @@ public class GODS {
 	 * Create the application.
 	 */
 	public GODS() {
+		
+		Swarmling ling = new Swarmling();
+		Swarmide ide = new Swarmide();
+		Swarmodon odon = new Swarmodon();
+		
+		
 		initialize();
+		
+		
 	}
 
 	/**

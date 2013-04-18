@@ -1,0 +1,22 @@
+import java.util.Vector;
+
+public class Swarmide extends Unit{
+	
+	private Swarmodon boss;
+	private Vector<Swarmling> children;
+	
+	Swarmide()
+	{
+		super();
+		children = new Vector<Swarmling>();
+	}
+	
+	public boolean canProduceSwarmlings()
+	{
+		if (children.size() < 5)
+			return true;
+		else
+			return false;
+	}
+
+}

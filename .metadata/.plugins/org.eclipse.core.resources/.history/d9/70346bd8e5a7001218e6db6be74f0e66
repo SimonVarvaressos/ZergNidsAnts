@@ -1,0 +1,28 @@
+
+public class Overmind extends Unit{
+	
+	protected float energy;
+	
+	Overmind()
+	{
+		super();
+	}
+	
+	protected void checkMessages()
+	{
+		
+	}
+
+	@Override
+	protected void act() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void sendMessage() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
