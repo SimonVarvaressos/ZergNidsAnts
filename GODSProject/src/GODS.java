@@ -2,6 +2,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import Frame.AppFrame;
+
 
 public class GODS {
 
@@ -14,8 +16,9 @@ public class GODS {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GODS window = new GODS();
-					window.frame.setVisible(true);
+					//GODS window = new GODS();
+					//window.frame.setVisible(true);
+					AppFrame.getInstance().setVisible(true);
 					
 				} catch (Exception e) {
 					e.printStackTrace();

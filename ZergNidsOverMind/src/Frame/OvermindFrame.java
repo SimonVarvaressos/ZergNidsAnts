@@ -1,0 +1,117 @@
+package Frame;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.text.NumberFormat;
+import java.util.Locale;
+
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
+
+
+public class OvermindFrame extends JPanel{
+
+	private static final String OVERMIND_PORTRAIT_PATH = "Ressources/OvermindPortrait.png";
+	
+	private static final String TXT_TITLE = " OVERMIND ";
+	private static final String TXT_HP = " HP: ";
+	private static final String TXT_ENERGY = " ENERGY: ";
+	private static final String TXT_MSG = " Message: ";
+	
+	private static final int INIT_HP = 3000;
+	private static final int INIT_ENERGY = 10000;
+	private static final String INIT_MSG = " No message at the moment ";
+
+	private BorderLayout _MainLayout;
+	private GridLayout _SubLayout;
+	
+	private TitledBorder _OvermindBorder;
+	
+	private JPanel _firstPanel = new JPanel();
+	private JPanel _secondPanel = new JPanel();
+	
+	private JLabel _lblImg;
+	
+	private Label _lblHP = new Label();
+	private Label _lblActualHP = new Label();
+	private Label _lblEnergy = new Label();
+	private Label _lblActualEnergy = new Label();
+	private Label _lblMsg = new Label();
+	private Label _lblActualMsg = new Label();
+	
+	public OvermindFrame(){
+		super();
+		initGraphicData();
+	}
+	
+	private void initGraphicData(){
+
+		_lblImg = new JLabel(new ImageIcon(this.getClass().getResource(OvermindFrame.OVERMIND_PORTRAIT_PATH)));
+		_firstPanel.add(_lblImg);
+
+		
+		_lblHP.setText(TXT_HP);
+		_lblActualHP.setAlignment(Label.CENTER);
+		_lblActualHP.setText(String.valueOf(INIT_HP));
+		
+		_lblEnergy.setText(TXT_ENERGY);
+		_lblActualEnergy.setAlignment(Label.CENTER);
+		_lblActualEnergy.setText(String.valueOf(INIT_ENERGY));
+		
+		_lblMsg.setText(TXT_MSG);
+		_lblActualMsg.setAlignment(Label.CENTER);
+		_lblActualMsg.setText(String.valueOf(INIT_MSG));
+		
+		_MainLayout = new BorderLayout();
+		_SubLayout = new GridLayout(3,2);
+		
+		_OvermindBorder = BorderFactory.createTitledBorder(TXT_TITLE);
+		
+		_firstPanel.setPreferredSize(new Dimension(120,120));
+		
+		_secondPanel.setLayout(_SubLayout);
+		_secondPanel.add(_lblHP);
+		_secondPanel.add(_lblActualHP);
+		_secondPanel.add(_lblEnergy);
+		_secondPanel.add(_lblActualEnergy);
+		_secondPanel.add(_lblMsg);
+		_secondPanel.add(_lblActualMsg);
+		
+		this.setBorder(_OvermindBorder);
+		this.setLayout(_MainLayout);
+		this.add(_firstPanel, BorderLayout.WEST);
+		this.add(_secondPanel, BorderLayout.CENTER);
+		//this.setPreferredSize(new Dimension(275,125));
+		
+		this.setVisible(true);
+	}
+	
+	public void updateAllData(int anAmountofHP, int anAmountofEnergy, String aMsg){
+		_lblActualHP.setText(String.valueOf(anAmountofHP));
+		
+		_lblActualHP.setText(String.valueOf(anAmountofEnergy));
+		
+		_lblActualHP.setText(String.valueOf(aMsg));
+	}
+	
+	public void updateHP(int anAmountofHP){
+		_lblActualHP.setText(String.valueOf(anAmountofHP));
+	}
+	
+	public void updateEnergy(int anAmountofEnergy){
+		_lblActualHP.setText(String.valueOf(anAmountofEnergy));
+	}
+	
+	public void updateMsg(String aMsg){
+		_lblActualHP.setText(String.valueOf(aMsg));
+	}
+}
