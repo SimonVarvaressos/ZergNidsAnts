@@ -1,9 +1,9 @@
 
 public class Terranodon extends Unit {
 	
-	Terranodon()
+	Terranodon(Vector2 pos)
 	{
-		super();
+		super(pos);
 	}
 
 	@Override

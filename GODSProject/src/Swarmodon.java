@@ -1,13 +1,18 @@
 import java.util.Vector;
 
+enum SwarmodonState{
+	Attack,
+	Roam
+}
+
 public class Swarmodon extends Unit{
 	
 	private Overmind boss;
 	private Vector<Swarmide> children;
 	
-	Swarmodon()
+	Swarmodon(Vector2 pos)
 	{
-		super();
+		super(pos);
 		children = new Vector<Swarmide>();
 		unitType = "Swarmodon";
 	}
@@ -23,6 +28,11 @@ public class Swarmodon extends Unit{
 	public void addSwarmide(Swarmide s)
 	{
 		children.add(s);
+	}
+	
+	public Vector<Swarmide> getSwarmides()
+	{
+		return children;
 	}
 
 	@Override

@@ -1,9 +1,9 @@
 
 public class Terranide extends Unit{
 	
-	Terranide()
+	Terranide(Vector2 pos)
 	{
-		super();
+		super(pos);
 	}
 
 	@Override

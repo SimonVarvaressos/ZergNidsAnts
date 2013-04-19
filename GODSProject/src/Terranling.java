@@ -1,9 +1,9 @@
 
 public class Terranling extends Unit {
 	
-	Terranling()
+	Terranling(Vector2 pos)
 	{
-		super();
+		super(pos);
 	}
 
 	@Override

@@ -6,9 +6,10 @@ public abstract class Unit extends Agent {
 	protected float life;
 	protected String unitType;
 	
-	Unit()
+	Unit(Vector2 pos)
 	{
 		super();
+		position = pos;
 	}
 	
 	protected void moveTo(Vector2 destination)

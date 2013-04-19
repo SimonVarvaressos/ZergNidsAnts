@@ -1,12 +1,17 @@
-
+enum SwarmlingState
+{
+	Attack,
+	Roam,
+	Gather
+}
 
 public class Swarmling extends Unit{
 	
 	private Swarmide boss;
 	
-	Swarmling()
+	Swarmling(Vector2 pos)
 	{
-		super();
+		super(pos);
 		unitType = "Swarmling";
 	}
 

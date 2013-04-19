@@ -32,9 +32,9 @@ public class GODS {
 	 */
 	public GODS() {
 		
-		Swarmling ling = new Swarmling();
-		Swarmide ide = new Swarmide();
-		Swarmodon odon = new Swarmodon();
+		//Swarmling ling = new Swarmling();
+		//Swarmide ide = new Swarmide();
+		//Swarmodon odon = new Swarmodon();
 		
 		
 		initialize();
