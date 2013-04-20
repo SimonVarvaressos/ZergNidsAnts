@@ -19,6 +19,7 @@ public abstract class Unit extends Agent {
 	public Vector2 getGoal() { return goal; }
 	public void setGoal(Vector2 newGoal) { goal = newGoal;}
 	
+	
 	protected void moveTo(Vector2 destination)
 	{
 		Vector2 direction = new Vector2(destination.getX()- position.getX(), destination.getY()- position.getY());

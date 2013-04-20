@@ -1,0 +1,15 @@
+
+/////////////////////////////////////////////
+//Cette classe contient les constantes comme la vitesse des unités, nombre max de Swarmlings par Swarmide,etc...
+//Cela facilite le changement de ces variables
+/////////////////////////////////////////////
+
+public class Constants {
+
+	public final int swarmlingsMax = 3;
+	public final int swarmidesMax = 3;
+	public final int swarmodonsMax = 4;
+	public final float swarmlingSpeed = 2.0f;
+	public final float swarmideSpeed = 1.4f;
+	public final float swarmodonSpeed = 1.0f;
+}

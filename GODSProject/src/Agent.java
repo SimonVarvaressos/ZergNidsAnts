@@ -33,7 +33,11 @@ public abstract class Agent extends Thread{
 	
 	protected abstract void checkMessages();
 	protected abstract void act();
-	protected abstract void receiveMessage(Message m);
+	
+	public void receiveMessage(Message m)
+	{
+		boiteMessages.add(m);
+	}
 	
 	
 }

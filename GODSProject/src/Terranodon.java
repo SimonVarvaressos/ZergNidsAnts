@@ -1,21 +1,32 @@
+import java.util.Random;
+
 
 enum TerranodonState implements State{
 	Attack {
 		public void act(Unit u)
 		{
-			
+			//TO DO
 		}
 	},
 	Roam {
 		public void act(Unit u)
 		{
-			
+			//TO DO : Si ennemi proche, on change pour Attack
+			Vector2 newGoal = new Vector2();
+			Random rand = new Random();
+			newGoal.setX(u.getGoal().getX() + (rand.nextInt(4) - 2));
+			newGoal.setY(u.getGoal().getY() + (rand.nextInt(4) - 2));
+			u.setGoal(newGoal);
+			u.moveTo(newGoal);
 		}
 	},
 	GoingTo {
 		public void act(Unit u)
 		{
-			
+			if (u.getPos() == u.getGoal())
+				((Terranodon)u).changeState(Roam);
+			else
+				u.moveTo(u.getGoal());
 		}
 	}
 }
@@ -27,7 +38,11 @@ public class Terranodon extends Unit {
 	Terranodon(Vector2 pos)
 	{
 		super(pos);
-		speed = 1.0f;
+		speed = Constants.terranodonSpeed;
+	}
+
+	public void changeState(TerranodonState newState) {
+		state = newState;
 	}
 
 	@Override
@@ -39,13 +54,6 @@ public class Terranodon extends Unit {
 	@Override
 	protected void act() {
 		state.act(this);
-		
-	}
-
-
-	@Override
-	protected void receiveMessage(Message m) {
-		// TODO Auto-generated method stub
 		
 	}
 

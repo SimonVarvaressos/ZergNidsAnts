@@ -86,7 +86,7 @@ public class Overmind extends Unit{
 	}
 
 	@Override
-	protected void receiveMessage(Message m) {
+	public void receiveMessage(Message m) {
 		// TODO Auto-generated method stub
 		
 	}

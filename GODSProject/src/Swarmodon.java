@@ -1,22 +1,32 @@
+import java.util.Random;
 import java.util.Vector;
 
 enum SwarmodonState implements State {
 	Attack {
 		public void act(Unit u)
 		{
-			
+			//TO DO
 		}
 	},
 	Roam {
 		public void act(Unit u)
 		{
-			
+			//TO DO : Si ennemi proche, on change pour Attack
+			Vector2 newGoal = new Vector2();
+			Random rand = new Random();
+			newGoal.setX(u.getGoal().getX() + (rand.nextInt(4) - 2));
+			newGoal.setY(u.getGoal().getY() + (rand.nextInt(4) - 2));
+			u.setGoal(newGoal);
+			u.moveTo(newGoal);
 		}
 	},
 	GoingTo {
 		public void act(Unit u)
 		{
-			
+			if (u.getPos() == u.getGoal())
+				((Swarmodon)u).changeState(Roam);
+			else
+				u.moveTo(u.getGoal());
 		}
 	}
 }
@@ -32,13 +42,17 @@ public class Swarmodon extends Unit{
 		super(pos);
 		children = new Vector<Swarmide>();
 		unitType = "Swarmodon";
-		speed = 1.0f;
+		speed = Constants.swarmodonSpeed;
 		state = SwarmodonState.Roam;
 	}
 	
+	public void changeState(SwarmodonState newState) {
+		state = newState;
+	}
+
 	public boolean canProduceSwarmide()
 	{
-		if (children.size() < 5)
+		if (children.size() < Constants.swarmidesMax)
 			return true;
 		else
 			return false;
@@ -61,7 +75,7 @@ public class Swarmodon extends Unit{
 		{
 			Message m = boiteMessages.remove();
 			System.out.println("Swarmodon received message - " + m.type.toString());
-			if (m.destinataire == "Swarmide")
+			if (m.destinataire == "Swarmide" && m.destinataire == "Swarmling")
 			{
 				sendMessageToSwarmides(m);
 				return;
@@ -70,6 +84,17 @@ public class Swarmodon extends Unit{
 			{
 				boss.receiveMessage(m);
 				return;
+			}
+			///// Traiter les messages
+			if (m.type == TypeMessage.Attack)
+			{
+				goal = m.position;
+				state = SwarmodonState.Attack;
+			}
+			else if (m.type == TypeMessage.GoTo)
+			{
+				goal = m.position;
+				state = SwarmodonState.GoingTo;
 			}
 		}
 		
@@ -86,12 +111,6 @@ public class Swarmodon extends Unit{
 		{
 			s.receiveMessage(m);
 		}
-	}
-
-	@Override
-	protected void receiveMessage(Message m) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

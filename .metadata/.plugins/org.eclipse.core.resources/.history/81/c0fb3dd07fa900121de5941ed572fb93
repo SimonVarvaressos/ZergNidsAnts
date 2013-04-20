@@ -1,0 +1,104 @@
+import java.util.Vector;
+
+enum SwarmodonState implements State {
+	Attack {
+		public void act(Unit u)
+		{
+			
+		}
+	},
+	Roam {
+		public void act(Unit u)
+		{
+			
+		}
+	},
+	GoingTo {
+		public void act(Unit u)
+		{
+			if (u.getPos() == u.getGoal())
+				((Swarmodon)u).changeState(Roam);
+			else
+				u.moveTo(u.getGoal());
+		}
+	}
+}
+
+public class Swarmodon extends Unit{
+	
+	private Overmind boss;
+	private Vector<Swarmide> children;
+	private SwarmodonState state;
+	
+	Swarmodon(Vector2 pos)
+	{
+		super(pos);
+		children = new Vector<Swarmide>();
+		unitType = "Swarmodon";
+		speed = 1.0f;
+		state = SwarmodonState.Roam;
+	}
+	
+	public void changeState(SwarmodonState newState) {
+		state = newState;
+	}
+
+	public boolean canProduceSwarmide()
+	{
+		if (children.size() < 5)
+			return true;
+		else
+			return false;
+	}
+	
+	public void addSwarmide(Swarmide s)
+	{
+		children.add(s);
+	}
+	
+	public Vector<Swarmide> getSwarmides()
+	{
+		return children;
+	}
+
+	@Override
+	protected void checkMessages() {
+		
+		if (!boiteMessages.isEmpty())
+		{
+			Message m = boiteMessages.remove();
+			System.out.println("Swarmodon received message - " + m.type.toString());
+			if (m.destinataire == "Swarmide")
+			{
+				sendMessageToSwarmides(m);
+				return;
+			}
+			if (m.destinataire == "Overmind")
+			{
+				boss.receiveMessage(m);
+				return;
+			}
+		}
+		
+	}
+
+	@Override
+	protected void act() {
+		state.act(this);
+	}
+	
+	protected void sendMessageToSwarmides(Message m)
+	{
+		for(Swarmide s : children)
+		{
+			s.receiveMessage(m);
+		}
+	}
+
+	@Override
+	protected void receiveMessage(Message m) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
