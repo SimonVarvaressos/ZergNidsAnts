@@ -18,6 +18,7 @@ public class GODS {
 				try {
 					//GODS window = new GODS();
 					//window.frame.setVisible(true);
+					//Swarmling ling = new Swarmling(new Vector2());
 					AppFrame.getInstance().setVisible(true);
 					
 				} catch (Exception e) {
@@ -32,7 +33,7 @@ public class GODS {
 	 */
 	public GODS() {
 		
-		//Swarmling ling = new Swarmling();
+		
 		//Swarmide ide = new Swarmide();
 		//Swarmodon odon = new Swarmodon();
 		

@@ -2,6 +2,8 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.util.Vector"/>
 <fullyQualifiedTypeName name="java.util.concurrent.BlockingQueue"/>
-<fullyQualifiedTypeName name="TypeMessage"/>
 <fullyQualifiedTypeName name="java.util.concurrent.ArrayBlockingQueue"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="TypeMessage"/>
+<fullyQualifiedTypeName name="Constants"/>
 </qualifiedTypeNameHistroy>

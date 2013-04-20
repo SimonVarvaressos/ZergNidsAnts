@@ -39,6 +39,8 @@ public class Terranling extends Unit {
 	{
 		super(pos);
 		speed = Constants.terranlingSpeed;
+		goal = new Vector2();
+		state = TerranlingState.Roam;
 	}
 
 	public void changeState(TerranlingState newState) {
@@ -53,7 +55,11 @@ public class Terranling extends Unit {
 
 	@Override
 	protected void act() {
-		state.act(this);
+		if (state != null)
+		{
+			state.act(this);
+			//System.out.println("Yolo");
+		}
 		
 	}
 

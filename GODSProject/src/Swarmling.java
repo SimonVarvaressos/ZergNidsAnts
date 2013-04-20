@@ -11,6 +11,7 @@ enum SwarmlingState implements State
 	Roam {
 		public void act(Unit u)
 		{
+			//System.out.println("Grrr");
 			//TO DO : Si ennemi proche, on change pour Attack
 			Vector2 newGoal = new Vector2();
 			Random rand = new Random();
@@ -42,11 +43,13 @@ public class Swarmling extends Unit{
 	private Swarmide boss;
 	private SwarmlingState state;
 	
+	
 	Swarmling(Vector2 pos)
 	{
 		super(pos);
 		unitType = "Swarmling";
 		speed = Constants.swarmlingSpeed;
+		goal = new Vector2();
 		state = SwarmlingState.Roam;
 	}
 	
@@ -82,7 +85,11 @@ public class Swarmling extends Unit{
 
 	@Override
 	protected void act() {
-		state.act(this);
+		if (state != null)
+		{
+			state.act(this);
+			//System.out.println("Yolo");
+		}
 		
 	}
 

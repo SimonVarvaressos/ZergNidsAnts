@@ -39,6 +39,8 @@ public class Terranide extends Unit{
 	{
 		super(pos);
 		speed = Constants.terranideSpeed;
+		goal = new Vector2();
+		state = TerranideState.Roam;
 	}
 
 	public void changeState(TerranideState newState) {
@@ -54,8 +56,11 @@ public class Terranide extends Unit{
 
 	@Override
 	protected void act() {
-		state.act(this);
-		
+		if (state != null)
+		{
+			state.act(this);
+			//System.out.println("Yolo");
+		}
 	}
 
 }

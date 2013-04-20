@@ -43,6 +43,7 @@ public class Swarmide extends Unit{
 		children = new Vector<Swarmling>();
 		unitType = "Swarmide";
 		speed = Constants.swarmideSpeed;
+		goal = new Vector2();
 		state = SwarmideState.Roam;
 	}
 	
@@ -103,8 +104,11 @@ public class Swarmide extends Unit{
 
 	@Override
 	protected void act() {
-		state.act(this);
-		
+		if (state != null)
+		{
+			state.act(this);
+			//System.out.println("Yolo");
+		}
 	}
 	
 	protected void sendMessageToSwarmlings(Message m)

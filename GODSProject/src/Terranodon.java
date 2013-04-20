@@ -39,6 +39,8 @@ public class Terranodon extends Unit {
 	{
 		super(pos);
 		speed = Constants.terranodonSpeed;
+		goal = new Vector2();
+		state = TerranodonState.Roam;
 	}
 
 	public void changeState(TerranodonState newState) {
@@ -53,7 +55,11 @@ public class Terranodon extends Unit {
 
 	@Override
 	protected void act() {
-		state.act(this);
+		if (state != null)
+		{
+			state.act(this);
+			//System.out.println("Yolo");
+		}
 		
 	}
 
