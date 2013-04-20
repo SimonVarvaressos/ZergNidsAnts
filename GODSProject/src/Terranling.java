@@ -1,9 +1,27 @@
 
+enum TerranlingState implements State{
+	Attack {
+		public void act(Unit u)
+		{
+			
+		}
+	},
+	Roam {
+		public void act(Unit u)
+		{
+			
+		}
+	}
+}
+
 public class Terranling extends Unit {
+	
+	private TerranlingState state;
 	
 	Terranling(Vector2 pos)
 	{
 		super(pos);
+		speed = 2.0f;
 	}
 
 	@Override
@@ -14,7 +32,7 @@ public class Terranling extends Unit {
 
 	@Override
 	protected void act() {
-		// TODO Auto-generated method stub
+		state.act(this);
 		
 	}
 

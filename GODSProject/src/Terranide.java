@@ -1,9 +1,27 @@
 
+enum TerranideState implements State{
+	Attack {
+		public void act(Unit u)
+		{
+			
+		}
+	},
+	Roam {
+		public void act(Unit u)
+		{
+			
+		}
+	}
+}
+
 public class Terranide extends Unit{
+	
+	private TerranideState state;
 	
 	Terranide(Vector2 pos)
 	{
 		super(pos);
+		speed = 1.4f;
 	}
 
 	@Override
@@ -14,7 +32,7 @@ public class Terranide extends Unit{
 
 	@Override
 	protected void act() {
-		// TODO Auto-generated method stub
+		state.act(this);
 		
 	}
 

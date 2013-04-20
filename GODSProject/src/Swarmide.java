@@ -1,8 +1,18 @@
 import java.util.Vector;
 
-enum SwarmideState{
-	Attack,
-	Roam
+enum SwarmideState implements State{
+	Attack {
+		public void act(Unit u)
+		{
+			
+		}
+	},
+	Roam {
+		public void act(Unit u)
+		{
+			
+		}
+	}
 }
 
 public class Swarmide extends Unit{
@@ -15,6 +25,7 @@ public class Swarmide extends Unit{
 		super(pos);
 		children = new Vector<Swarmling>();
 		unitType = "Swarmide";
+		speed = 1.4f;
 	}
 	
 	public boolean canProduceSwarmlings()

@@ -1,20 +1,33 @@
 import java.util.Vector;
 
-enum SwarmodonState{
-	Attack,
-	Roam
+enum SwarmodonState implements State {
+	Attack {
+		public void act(Unit u)
+		{
+			
+		}
+	},
+	Roam {
+		public void act(Unit u)
+		{
+			
+		}
+	}
 }
 
 public class Swarmodon extends Unit{
 	
 	private Overmind boss;
 	private Vector<Swarmide> children;
+	private SwarmodonState state;
 	
 	Swarmodon(Vector2 pos)
 	{
 		super(pos);
 		children = new Vector<Swarmide>();
 		unitType = "Swarmodon";
+		speed = 1.0f;
+		state = SwarmodonState.Roam;
 	}
 	
 	public boolean canProduceSwarmide()
@@ -58,8 +71,7 @@ public class Swarmodon extends Unit{
 
 	@Override
 	protected void act() {
-		//System.out.println("Swarmodon");
-		
+		state.act(this);
 	}
 	
 	protected void sendMessageToSwarmides(Message m)

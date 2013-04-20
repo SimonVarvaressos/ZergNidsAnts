@@ -1,9 +1,27 @@
 
+enum TerranodonState implements State{
+	Attack {
+		public void act(Unit u)
+		{
+			
+		}
+	},
+	Roam {
+		public void act(Unit u)
+		{
+			
+		}
+	}
+}
+
 public class Terranodon extends Unit {
+	
+	private TerranodonState state;
 	
 	Terranodon(Vector2 pos)
 	{
 		super(pos);
+		speed = 1.0f;
 	}
 
 	@Override
@@ -14,7 +32,7 @@ public class Terranodon extends Unit {
 
 	@Override
 	protected void act() {
-		// TODO Auto-generated method stub
+		state.act(this);
 		
 	}
 

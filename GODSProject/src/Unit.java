@@ -12,6 +12,11 @@ public abstract class Unit extends Agent {
 		position = pos;
 	}
 	
+	public Vector2 getPos()
+	{
+		return position;
+	}
+	
 	protected void moveTo(Vector2 destination)
 	{
 		Vector2 direction = new Vector2(destination.getX()- position.getX(), destination.getY()- position.getY());

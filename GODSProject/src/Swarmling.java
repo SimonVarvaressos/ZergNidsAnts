@@ -1,8 +1,23 @@
-enum SwarmlingState
+enum SwarmlingState implements State
 {
-	Attack,
-	Roam,
-	Gather
+	Attack {
+		public void act(Unit u)
+		{
+			
+		}
+	},
+	Roam {
+		public void act(Unit u)
+		{
+			
+		}
+	},
+	Gather {
+		public void act(Unit u)
+		{
+			
+		}
+	}
 }
 
 public class Swarmling extends Unit{
@@ -13,6 +28,7 @@ public class Swarmling extends Unit{
 	{
 		super(pos);
 		unitType = "Swarmling";
+		speed = 2.0f;
 	}
 
 	@Override
