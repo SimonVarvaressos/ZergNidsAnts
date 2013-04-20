@@ -31,10 +31,12 @@ public class AppFrame extends JFrame implements WindowListener{
 	private ToolBar _toolbar = new ToolBar();
 	private OvermindFrame _overmindFrame = new OvermindFrame();
 	private StatisticFrame _stats = new StatisticFrame();
+	public EnvironmentFrame _environment = new EnvironmentFrame();
 	
 	private AppFrame(){
 		super();
 		
+		this.setResizable(false);
 		this.setSize(800,640);
 		this.setTitle(AppFrame.TITLE);
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -67,7 +69,7 @@ public class AppFrame extends JFrame implements WindowListener{
 		
 		_SecondPanel.setLayout(_mainWindowSubLayout2);
 		_SecondPanel.add(_overmindFrame, BorderLayout.SOUTH);
-		//_SecondPanel.add([environment], BorderLayout.CENTER);
+		_SecondPanel.add(_environment, BorderLayout.CENTER);
 		//_SecondPanel.setPreferredSize(new Dimension(200,450));
 		_SecondPanel.setVisible(true);
 		

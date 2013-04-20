@@ -1,0 +1,13 @@
+package Frame;
+
+import javax.swing.JPanel;
+
+public class EnvironmentFrame extends JPanel {
+
+	
+	public EnvironmentFrame(){
+		super();
+		this.setLayout(null);
+		this.setBackground(java.awt.Color.DARK_GRAY);
+	}
+}

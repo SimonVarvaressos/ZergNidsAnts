@@ -1,0 +1,19 @@
+package Frame.UnitVisual;
+
+public enum VisualType {
+	SWARMLING 	("Ressources/OvermindPortrait.png"),
+	SWARMIDE 	("Ressources/OvermindPortrait.png"),
+	SWARMODON 	("Ressources/OvermindPortrait.png"),
+	TERANLING	("Ressources/OvermindPortrait.png"),
+	TERANIDE	("Ressources/OvermindPortrait.png"),
+	TERANODON	("Ressources/OvermindPortrait.png"),
+	D_TERANLING	("Ressources/OvermindPortrait.png"),
+	D_TERANIDE	("Ressources/OvermindPortrait.png"),
+	D_TERANODON	("Ressources/OvermindPortrait.png"),
+	OVERMIND	("Ressources/OvermindPortrait.png");	
+	
+	private final String _imgPath;
+	VisualType(String aImgPath){
+		_imgPath = aImgPath;
+	}
+}

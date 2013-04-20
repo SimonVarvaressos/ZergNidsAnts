@@ -1,0 +1,20 @@
+package Frame.UnitVisual;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class UnitFrame extends JPanel{
+
+	private JLabel _ImgLabel = new JLabel();
+	
+	public UnitFrame(VisualType aVisualType){
+		super();
+		this.setLayout(null);
+		this.setOpaque(false);
+		this.setSize(aVisualType.size(), aVisualType.size());
+		_ImgLabel.setIcon(new ImageIcon(aVisualType.path()));
+		this.add(this._ImgLabel);
+		//_ImgLabel.setLocation(_ImgLabel.getX() - aVisualType.half(), _ImgLabel.getY() - aVisualType.half());
+	}
+}

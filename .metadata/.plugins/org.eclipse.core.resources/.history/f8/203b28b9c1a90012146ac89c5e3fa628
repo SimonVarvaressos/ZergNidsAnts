@@ -1,0 +1,33 @@
+package Frame;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
+
+public class EnvironmentFrame extends JPanel {
+
+	private static final String OVERMIND_PORTRAIT_PATH = "Ressources/OvermindPortrait.png";
+	
+	private static final String TXT_TITLE = " ENVIRONMENT ";
+	
+	private BorderLayout _MainLayout = new BorderLayout();
+	
+	private JPanel _field = new JPanel();
+	
+	private TitledBorder _EnvironmentBorder = new TitledBorder(TXT_TITLE);
+	
+	
+	public EnvironmentFrame(){
+		super();
+		this.setLayout(_MainLayout);
+		initField();
+		this.add(_field,BorderLayout.CENTER);
+	}
+	
+	private void initField(){
+		_field.setLayout(null);
+		//_field.setBackground(java.awt.Color.DARK_GRAY);
+		_field.setBorder(_EnvironmentBorder);
+	}
+}

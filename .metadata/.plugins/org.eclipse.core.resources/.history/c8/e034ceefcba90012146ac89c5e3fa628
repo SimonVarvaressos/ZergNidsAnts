@@ -1,0 +1,9 @@
+package Frame.UnitVisual;
+
+public class UnitFrame {
+
+	
+	public UnitFrame(VisualType aVisualType){
+		
+	}
+}

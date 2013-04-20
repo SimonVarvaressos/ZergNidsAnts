@@ -1,0 +1,9 @@
+package Frame;
+
+import javax.swing.JPanel;
+
+public class EnvrionmentFrame extends JPanel{
+
+	
+	
+}

@@ -1,0 +1,21 @@
+package Frame.UnitVisual;
+
+public enum VisualType {
+	SWARMLING 			("UnitVisualRessources/SwarmlingIMG.GIF"),
+	SWARMLING_CARRIER 	("UnitVisualRessources/SwarmlingCarrierIMG.GIF"),
+	SWARMIDE 			("UnitVisualRessources/SwarmideIMG.GIF"),
+	SWARMODON 			("UnitVisualRessources/SwarmodonIMG.GIF"),
+	TERANLING			("UnitVisualRessources/TeranlingIMG.GIF"),
+	TERANIDE			("UnitVisualRessources/TeranideIMG.GIF"),
+	TERANODON			("UnitVisualRessources/TeranodonIMG.GIF"),
+	D_TERANLING			("UnitVisualRessources/D_TeranlingIMG.GIF"),
+	D_TERANIDE			("UnitVisualRessources/D_TeranideIMG.GIF"),
+	D_TERANODON			("UnitVisualRessources/D_TeranodonIMG.GIF"),
+	OVERMIND			("UnitVisualRessources/OvermindIMG.GIF");	
+	
+	@SuppressWarnings("unused")
+	private final String _imgPath;
+	VisualType(String aImgPath){
+		_imgPath = aImgPath;
+	}
+}

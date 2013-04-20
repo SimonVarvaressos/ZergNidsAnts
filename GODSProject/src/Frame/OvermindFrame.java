@@ -17,10 +17,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import Frame.UnitVisual.UnitFrame;
+import Frame.UnitVisual.VisualType;
+
 
 public class OvermindFrame extends JPanel{
 
 	private static final String OVERMIND_PORTRAIT_PATH = "Ressources/OvermindPortrait.png";
+	//private static final String OVERMIND_PORTRAIT_PATH = "UnitVisual/UnitVisualRessources/OvermindIMG.gif";
 	
 	private static final String TXT_TITLE = " OVERMIND ";
 	private static final String TXT_HP = " HP: ";
@@ -57,7 +61,6 @@ public class OvermindFrame extends JPanel{
 
 		_lblImg = new JLabel(new ImageIcon(this.getClass().getResource(OvermindFrame.OVERMIND_PORTRAIT_PATH)));
 		_firstPanel.add(_lblImg);
-
 		
 		_lblHP.setText(TXT_HP);
 		_lblActualHP.setAlignment(Label.CENTER);
