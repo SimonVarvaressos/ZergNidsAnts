@@ -16,8 +16,6 @@ public abstract class Unit extends Agent {
 	{
 		return position;
 	}
-	public Vector2 getGoal() { return goal; }
-	public void setGoal(Vector2 newGoal) { goal = newGoal;}
 	
 	protected void moveTo(Vector2 destination)
 	{

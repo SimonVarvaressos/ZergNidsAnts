@@ -12,12 +12,6 @@ enum SwarmlingState implements State
 			
 		}
 	},
-	GoingTo {
-		public void act(Unit u)
-		{
-			
-		}
-	},
 	Gather {
 		public void act(Unit u)
 		{

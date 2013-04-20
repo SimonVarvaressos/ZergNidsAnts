@@ -1,5 +1,5 @@
 
-enum TerranideState implements State{
+enum TerranodonState implements State{
 	Attack {
 		public void act(Unit u)
 		{
@@ -11,23 +11,17 @@ enum TerranideState implements State{
 		{
 			
 		}
-	},
-	GoingTo {
-		public void act(Unit u)
-		{
-			
-		}
 	}
 }
 
-public class Terranide extends Unit{
+public class Terranodon extends Unit {
 	
-	private TerranideState state;
+	private TerranodonState state;
 	
-	Terranide(Vector2 pos)
+	Terranodon(Vector2 pos)
 	{
 		super(pos);
-		speed = 1.4f;
+		speed = 1.0f;
 	}
 
 	@Override

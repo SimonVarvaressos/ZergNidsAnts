@@ -1,6 +1,6 @@
 import java.util.Vector;
 
-enum SwarmideState implements State{
+enum SwarmodonState implements State {
 	Attack {
 		public void act(Unit u)
 		{
@@ -18,23 +18,23 @@ enum SwarmideState implements State{
 		{
 			
 		}
-	}
-}
 
-public class Swarmide extends Unit{
+public class Swarmodon extends Unit{
 	
-	private Swarmodon boss;
-	private Vector<Swarmling> children;
+	private Overmind boss;
+	private Vector<Swarmide> children;
+	private SwarmodonState state;
 	
-	Swarmide(Vector2 pos)
+	Swarmodon(Vector2 pos)
 	{
 		super(pos);
-		children = new Vector<Swarmling>();
-		unitType = "Swarmide";
-		speed = 1.4f;
+		children = new Vector<Swarmide>();
+		unitType = "Swarmodon";
+		speed = 1.0f;
+		state = SwarmodonState.Roam;
 	}
 	
-	public boolean canProduceSwarmlings()
+	public boolean canProduceSwarmide()
 	{
 		if (children.size() < 5)
 			return true;
@@ -42,29 +42,29 @@ public class Swarmide extends Unit{
 			return false;
 	}
 	
-	public void addSwarmling(Swarmling s)
+	public void addSwarmide(Swarmide s)
 	{
 		children.add(s);
 	}
 	
-	public Vector<Swarmling> getSwarmlings()
+	public Vector<Swarmide> getSwarmides()
 	{
 		return children;
 	}
 
 	@Override
 	protected void checkMessages() {
-
+		
 		if (!boiteMessages.isEmpty())
 		{
 			Message m = boiteMessages.remove();
-			System.out.println("Swarmide received message - " + m.type.toString());
-			if (m.destinataire == "Swarmling")
+			System.out.println("Swarmodon received message - " + m.type.toString());
+			if (m.destinataire == "Swarmide")
 			{
-				sendMessageToSwarmlings(m);
+				sendMessageToSwarmides(m);
 				return;
 			}
-			if (m.destinataire == "Swarmodon")
+			if (m.destinataire == "Overmind")
 			{
 				boss.receiveMessage(m);
 				return;
@@ -75,13 +75,12 @@ public class Swarmide extends Unit{
 
 	@Override
 	protected void act() {
-		//System.out.println("Swarmide");
-		
+		state.act(this);
 	}
 	
-	protected void sendMessageToSwarmlings(Message m)
+	protected void sendMessageToSwarmides(Message m)
 	{
-		for(Swarmling s : children)
+		for(Swarmide s : children)
 		{
 			s.receiveMessage(m);
 		}

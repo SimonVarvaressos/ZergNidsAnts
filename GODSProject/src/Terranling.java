@@ -11,6 +11,12 @@ enum TerranlingState implements State{
 		{
 			
 		}
+	},
+	GoingTo {
+		public void act(Unit u)
+		{
+			
+		}
 	}
 }
 

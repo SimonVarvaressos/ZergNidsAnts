@@ -12,12 +12,6 @@ enum SwarmideState implements State{
 		{
 			
 		}
-	},
-	GoingTo {
-		public void act(Unit u)
-		{
-			
-		}
 	}
 }
 
