@@ -40,7 +40,7 @@ public class Terranling extends Unit {
 	
 	private TerranlingState state;
 	
-	Terranling(Vector2 pos)
+	public Terranling(Vector2 pos)
 	{
 		super(pos);
 		

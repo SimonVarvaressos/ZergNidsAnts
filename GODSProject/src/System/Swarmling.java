@@ -103,5 +103,10 @@ public class Swarmling extends Unit{
 		}
 		
 	}
+	
+	protected void sendMessagetoBoss(Message m)
+	{
+		boss.receiveMessage(m);
+	}
 
 }

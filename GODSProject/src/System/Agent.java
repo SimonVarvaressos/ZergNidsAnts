@@ -23,7 +23,7 @@ public abstract class Agent extends Thread{
 			{
 				checkMessages();
 				act();
-				Thread.sleep(50);
+				Thread.sleep(10);
 			}
 			
 		} catch (InterruptedException e) {

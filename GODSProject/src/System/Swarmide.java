@@ -106,6 +106,16 @@ public class Swarmide extends Unit{
 				goal = m.position;
 				state = SwarmideState.GoingTo;
 			}
+			else if (m.type == TypeMessage.EnnemyDetected)
+			{
+				Message newM = new Message(TypeMessage.Attack, m.position, "Swarmling");
+				sendMessageToSwarmlings(newM);
+			}
+			else if (m.type == TypeMessage.EnergyDetected)
+			{
+				Message newM = new Message(TypeMessage.Loot, m.position, "Swarmling");
+				sendMessageToSwarmlings(newM);
+			}
 		}
 		
 	}

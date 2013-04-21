@@ -1,4 +1,9 @@
 package Frame;
+import System.Overmind;
+import System.Terranide;
+import System.Terranling;
+import System.Terranodon;
+import System.Vector2;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -64,19 +69,37 @@ public class ToolBar extends JToolBar implements ActionListener{
 	public ToolBar(){
 		super();
 		
-		btnAddSLing.addActionListener(this);
+		btnAddSLing.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+            {
+                //Execute when button is pressed
+                Overmind.getInstance().produceSwarmling();
+            }
+		});
 		btnAddSLing.setActionCommand(ASS_ACTION);
 		btnAddSLing.setIcon(new ImageIcon(this.getClass().getResource(SMALL_S_ICON_PATH)));
 		btnAddSLing.setToolTipText(TXT_ADD_SWARMLING);
 		add(this.btnAddSLing);
 		
-		btnAddSIde.addActionListener(this);
+		btnAddSIde.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+            {
+                //Execute when button is pressed
+                Overmind.getInstance().produceSwarmide();
+            }
+		});
 		btnAddSIde.setActionCommand(AMS_ACTION);
 		btnAddSIde.setIcon(new ImageIcon(this.getClass().getResource(MEDIUM_S_ICON_PATH)));
 		btnAddSIde.setToolTipText(TXT_ADD_SWARMIDE);
 		this.add(this.btnAddSIde);
 		
-		btnAddSOdon.addActionListener(this);
+		btnAddSOdon.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+            {
+                //Execute when button is pressed
+                Overmind.getInstance().produceSwarmodon();
+            }
+		});
 		btnAddSOdon.setActionCommand(ABS_ACTION);
 		btnAddSOdon.setIcon(new ImageIcon(this.getClass().getResource(BIG_S_ICON_PATH)));
 		btnAddSOdon.setToolTipText(TXT_ADD_SWARMODON);
@@ -86,19 +109,38 @@ public class ToolBar extends JToolBar implements ActionListener{
 		this.add(new JSeparator(SwingConstants.HORIZONTAL));
 
 		
-		btnAddTLing.addActionListener(this);
+		btnAddTLing.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+            {
+				Vector2 vect = new Vector2(0,180);
+                Terranling ling = new Terranling(vect);
+            }
+		});
 		btnAddTLing.setActionCommand(AST_ACTION);
 		btnAddTLing.setIcon(new ImageIcon(this.getClass().getResource(SMALL_T_ICON_PATH)));
 		btnAddTLing.setToolTipText(TXT_ADD_TERANLING);
 		add(this.btnAddTLing);
 		
-		btnAddTIde.addActionListener(this);
+		btnAddTIde.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+            {
+				Vector2 vect = new Vector2(0,180);
+                Terranide ide = new Terranide(vect);
+            }
+		});
 		btnAddTIde.setActionCommand(AMT_ACTION);
 		btnAddTIde.setIcon(new ImageIcon(this.getClass().getResource(MEDIUM_T_ICON_PATH)));
 		btnAddTIde.setToolTipText(TXT_ADD_TERANIDE);
 		this.add(this.btnAddTIde);
 		
-		btnAddTOdon.addActionListener(this);
+		btnAddTOdon.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+            {
+                //Execute when button is pressed
+				Vector2 vect = new Vector2(0,180);
+                Terranodon odon = new Terranodon(vect);
+            }
+		});
 		btnAddTOdon.setActionCommand(ABT_ACTION);
 		btnAddTOdon.setIcon(new ImageIcon(this.getClass().getResource(BIG_T_ICON_PATH)));
 		btnAddTOdon.setToolTipText(TXT_ADD_TERANODON);

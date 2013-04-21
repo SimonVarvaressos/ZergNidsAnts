@@ -10,6 +10,7 @@ public class Overmind extends Unit{
 	
 	protected float energy;
 	protected Vector<Swarmodon> children;
+	private static Overmind _instance;
 	
 	Overmind(Vector2 pos)
 	{
@@ -21,9 +22,16 @@ public class Overmind extends Unit{
 		goal = new Vector2();
 	}
 	
+	public static Overmind getInstance(){
+		if (Overmind._instance == null){
+			Overmind._instance = new Overmind(new Vector2(550,180));
+		}
+		return Overmind._instance;
+	}
+	
 	public boolean canProduceSwarmodons()
 	{
-		if (children.size() < 5)
+		if (children.size() < Constants.swarmodonsMax)
 			return true;
 		else
 			return false;
@@ -57,17 +65,14 @@ public class Overmind extends Unit{
 	{
 		for (Swarmodon s : children)
 		{
-			if (s.canProduceSwarmide())
+			Vector<Swarmide> theSwarmides = s.getSwarmides();
+			for (Swarmide s2 : theSwarmides)
 			{
-				Vector<Swarmide> theSwarmides = s.getSwarmides();
-				for (Swarmide s2 : theSwarmides)
+				if (s2.canProduceSwarmlings())
 				{
-					if (s2.canProduceSwarmlings())
-					{
-						Swarmling ing = new Swarmling(position);
-						s2.addSwarmling(ing);
-						return;
-					}
+					Swarmling ing = new Swarmling(position);
+					s2.addSwarmling(ing);
+					return;
 				}
 			}
 		}
@@ -81,7 +86,6 @@ public class Overmind extends Unit{
 
 	@Override
 	protected void act() {
-		// TODO Auto-generated method stub
 		
 	}
 

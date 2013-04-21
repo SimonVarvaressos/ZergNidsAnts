@@ -11,7 +11,7 @@ public class Vector2 {
 		y = 0.0f;
 	}
 	
-	Vector2(float theX, float theY)
+	public Vector2(float theX, float theY)
 	{
 		x = theX;
 		y = theY;

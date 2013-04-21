@@ -4,9 +4,9 @@ enum TypeMessage
 {
 	Attack,
 	GoTo,
-	Detect,
+	EnergyDetected,
 	Loot,
-	Detected
+	EnnemyDetected
 	
 }
 

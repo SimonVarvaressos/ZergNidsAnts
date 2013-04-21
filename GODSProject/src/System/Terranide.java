@@ -40,7 +40,7 @@ public class Terranide extends Unit{
 	
 	private TerranideState state;
 	
-	Terranide(Vector2 pos)
+	public Terranide(Vector2 pos)
 	{
 		super(pos);
 		

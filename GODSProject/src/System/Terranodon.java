@@ -40,7 +40,7 @@ public class Terranodon extends Unit {
 	
 	private TerranodonState state;
 	
-	Terranodon(Vector2 pos)
+	public Terranodon(Vector2 pos)
 	{
 		super(pos);
 		
