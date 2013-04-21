@@ -1,16 +1,18 @@
 package Frame;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import Frame.UnitVisual.UnitFrame;
 import Frame.UnitVisual.VisualType;
+import System.Unit;
 
 // !!! -> size of environment : max x = 568     max y = 389
 
-public class EnvironmentFrame extends JPanel {
+public class EnvironmentFrame extends JPanel{
 
 
 	private static final String TXT_TITLE = " ENVIRONMENT ";
@@ -23,10 +25,21 @@ public class EnvironmentFrame extends JPanel {
 	
 	private UnitFrame _overlord = new UnitFrame(VisualType.OVERMIND);
 	
-	public EnvironmentFrame(){
+	private static EnvironmentFrame _instance;
+	//private Thread _threadified = new Thread(this);
+	
+	
+	public static EnvironmentFrame getInstance(){
+		if (EnvironmentFrame._instance == null){
+			EnvironmentFrame._instance = new EnvironmentFrame();
+		}
+		return EnvironmentFrame._instance;
+	}
+	
+	private EnvironmentFrame(){
 		super();
 		initField();
-		
+		//_threadified.start();
 	}
 	
 	private void initField(){
@@ -35,14 +48,23 @@ public class EnvironmentFrame extends JPanel {
 		_field.setLayout(null);
 		_field.setBackground(java.awt.Color.GRAY);
 		this.add(_field,BorderLayout.CENTER);
-		
-		//this.add(_overlord,BorderLayout.CENTER);
-		_overlord.setLocation(545,170);
-		_field.add(this._overlord);
 
-		System.out.println(_field.getHeight());
-		System.out.println(_field.getWidth());
-		//this.repaint();
+		addUnit(_overlord, 545, 170);
+	}
+	
+	synchronized public void addUnit(UnitFrame aUnitFrame,int aX, int aY){
+		aUnitFrame.setLocation(aX,aY);
+		_field.add(aUnitFrame);
+
+		_field.validate();
+		_field.repaint();
+	}
+	
+	synchronized public void removeUnit(UnitFrame aUnitFrame){
+		_field.remove(aUnitFrame);
+		
+		_field.validate();
+		_field.repaint();
 	}
 	
 }

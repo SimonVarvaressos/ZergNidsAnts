@@ -1,6 +1,10 @@
 package System;
 import java.util.Random;
 
+import Frame.EnvironmentFrame;
+import Frame.UnitVisual.UnitFrame;
+import Frame.UnitVisual.VisualType;
+
 
 enum TerranodonState implements State{
 	Attack {
@@ -39,6 +43,10 @@ public class Terranodon extends Unit {
 	Terranodon(Vector2 pos)
 	{
 		super(pos);
+		
+		_frame = new UnitFrame(VisualType.TERANODON);
+		EnvironmentFrame.getInstance().addUnit(_frame, (int)pos.getX(), (int)pos.getY());
+		
 		speed = Constants.terranodonSpeed;
 		goal = new Vector2();
 		state = TerranodonState.Roam;

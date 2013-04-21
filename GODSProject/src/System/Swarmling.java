@@ -1,6 +1,10 @@
 package System;
 import java.util.Random;
 
+import Frame.EnvironmentFrame;
+import Frame.UnitVisual.UnitFrame;
+import Frame.UnitVisual.VisualType;
+
 enum SwarmlingState implements State
 {
 	Attack {
@@ -14,12 +18,14 @@ enum SwarmlingState implements State
 		{
 			//System.out.println("Grrr");
 			//TO DO : Si ennemi proche, on change pour Attack
+			
+			
 			Vector2 newGoal = new Vector2();
 			Random rand = new Random();
 			newGoal.setX(u.getGoal().getX() + (rand.nextInt(4) - 2));
 			newGoal.setY(u.getGoal().getY() + (rand.nextInt(4) - 2));
 			u.setGoal(newGoal);
-			u.moveTo(newGoal);
+			u.moveTo(newGoal); 
 		}
 	},
 	GoingTo {
@@ -45,9 +51,12 @@ public class Swarmling extends Unit{
 	private SwarmlingState state;
 	
 	
+	
 	Swarmling(Vector2 pos)
 	{
 		super(pos);
+		_frame = new UnitFrame(VisualType.SWARMLING);
+		EnvironmentFrame.getInstance().addUnit(_frame, (int)pos.getX(), (int)pos.getY());
 		unitType = "Swarmling";
 		speed = Constants.swarmlingSpeed;
 		goal = new Vector2();

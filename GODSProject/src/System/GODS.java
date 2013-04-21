@@ -19,8 +19,11 @@ public class GODS {
 				try {
 					//GODS window = new GODS();
 					//window.frame.setVisible(true);
-					//Swarmling ling = new Swarmling(new Vector2());
+					
 					AppFrame.getInstance().setVisible(true);
+					Swarmling ling = new Swarmling(new Vector2(100,100));
+					ling.setGoal(new Vector2(550, 180));
+					ling.changeState(SwarmlingState.GoingTo);
 					
 				} catch (Exception e) {
 					e.printStackTrace();

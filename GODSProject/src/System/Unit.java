@@ -1,4 +1,8 @@
 package System;
+
+import Frame.EnvironmentFrame;
+import Frame.UnitVisual.UnitFrame;
+
 public abstract class Unit extends Agent {
 
 	protected Vector2 position;
@@ -6,10 +10,14 @@ public abstract class Unit extends Agent {
 	protected float speed;
 	protected float life;
 	protected String unitType;
+	protected UnitFrame _frame;
 	
 	Unit(Vector2 pos)
 	{
 		super();
+		//_frame = new UnitFrame();
+		//EnvironmentFrame.getInstance().addUnit(this);
+		//_frame.setLocation((int)pos.getX(), (int)pos.getY());
 		position = pos;
 	}
 	
@@ -31,8 +39,12 @@ public abstract class Unit extends Agent {
 		
 		position.setX(position.getX()+movement.getX());
 		position.setY(position.getY()+movement.getY());
+		
+		_frame.setLocation((int)position.getX(), (int)position.getY());
 	}
 
-	
+	public UnitFrame getFrame(){
+		return _frame;
+	}
 	
 }

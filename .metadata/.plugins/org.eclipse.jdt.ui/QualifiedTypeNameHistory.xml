@@ -6,4 +6,10 @@
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="TypeMessage"/>
 <fullyQualifiedTypeName name="Constants"/>
+<fullyQualifiedTypeName name="System.Unit"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="Frame.EnvironmentFrame"/>
+<fullyQualifiedTypeName name="Frame.UnitVisual.UnitFrame"/>
+<fullyQualifiedTypeName name="java.awt.Component"/>
+<fullyQualifiedTypeName name="Frame.UnitVisual.VisualType"/>
 </qualifiedTypeNameHistroy>

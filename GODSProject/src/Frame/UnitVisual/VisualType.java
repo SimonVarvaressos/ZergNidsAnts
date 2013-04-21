@@ -1,7 +1,7 @@
 package Frame.UnitVisual;
 
 public enum VisualType {
-	SWARMLING 			("UnitVisualRessources/SwarmlingIMG.png"		,9	,4),
+	SWARMLING 			("UnitVisualRessources/SwamlingIMG.png"		,9	,4),
 	SWARMLING_CARRIER 	("UnitVisualRessources/SwarmlingCarrierIMG.png"	,9	,4),
 	SWARMIDE 			("UnitVisualRessources/SwarmideIMG.png"			,15	,7),
 	SWARMODON 			("UnitVisualRessources/SwarmodonIMG.png"		,21 ,10),

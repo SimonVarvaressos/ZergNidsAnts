@@ -2,6 +2,10 @@ package System;
 import java.util.Random;
 import java.util.Vector;
 
+import Frame.EnvironmentFrame;
+import Frame.UnitVisual.UnitFrame;
+import Frame.UnitVisual.VisualType;
+
 enum SwarmodonState implements State {
 	Attack {
 		public void act(Unit u)
@@ -41,6 +45,10 @@ public class Swarmodon extends Unit{
 	Swarmodon(Vector2 pos)
 	{
 		super(pos);
+		
+		_frame = new UnitFrame(VisualType.SWARMODON);
+		EnvironmentFrame.getInstance().addUnit(_frame, (int)pos.getX(), (int)pos.getY());
+		
 		children = new Vector<Swarmide>();
 		unitType = "Swarmodon";
 		speed = Constants.swarmodonSpeed;

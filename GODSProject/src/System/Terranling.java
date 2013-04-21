@@ -1,6 +1,10 @@
 package System;
 import java.util.Random;
 
+import Frame.EnvironmentFrame;
+import Frame.UnitVisual.UnitFrame;
+import Frame.UnitVisual.VisualType;
+
 
 enum TerranlingState implements State{
 	Attack {
@@ -39,6 +43,10 @@ public class Terranling extends Unit {
 	Terranling(Vector2 pos)
 	{
 		super(pos);
+		
+		_frame = new UnitFrame(VisualType.TERANLING);
+		EnvironmentFrame.getInstance().addUnit(_frame, (int)pos.getX(), (int)pos.getY());
+		
 		speed = Constants.terranlingSpeed;
 		goal = new Vector2();
 		state = TerranlingState.Roam;
