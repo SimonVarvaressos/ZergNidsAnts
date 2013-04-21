@@ -49,7 +49,7 @@ public class EnvironmentFrame extends JPanel{
 		_field.setBackground(java.awt.Color.GRAY);
 		this.add(_field,BorderLayout.CENTER);
 
-		addUnit(_overlord, 545, 170);
+		//addUnit(_overlord, 545, 170);
 	}
 	
 	synchronized public void addUnit(UnitFrame aUnitFrame,int aX, int aY){

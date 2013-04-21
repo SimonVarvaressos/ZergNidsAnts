@@ -22,19 +22,21 @@ enum SwarmlingState implements State
 			
 			Vector2 newGoal = new Vector2();
 			Random rand = new Random();
-			newGoal.setX(u.getGoal().getX() + (rand.nextInt(4) - 2));
-			newGoal.setY(u.getGoal().getY() + (rand.nextInt(4) - 2));
+			newGoal.setX(u.getGoal().getX() + (rand.nextInt(600) - 300));
+			newGoal.setY(u.getGoal().getY() + (rand.nextInt(600) - 300));
 			u.setGoal(newGoal);
-			u.moveTo(newGoal); 
+			u.moveTo(u.getGoal()); 
 		}
 	},
 	GoingTo {
 		public void act(Unit u)
 		{
-			if (u.getPos() == u.getGoal())
+			if (u.getPos().equals(u.getGoal()))
 				((Swarmling)u).changeState(Roam);
 			else
 				u.moveTo(u.getGoal());
+			
+			//System.out.println(u.getGoal().getX() + " and " + u.getGoal().getY());
 		}
 	},
 	Gather {
@@ -59,7 +61,6 @@ public class Swarmling extends Unit{
 		EnvironmentFrame.getInstance().addUnit(_frame, (int)pos.getX(), (int)pos.getY());
 		unitType = "Swarmling";
 		speed = Constants.swarmlingSpeed;
-		goal = new Vector2();
 		state = SwarmlingState.Roam;
 	}
 	

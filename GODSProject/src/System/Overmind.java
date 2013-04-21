@@ -1,6 +1,10 @@
 package System;
 import java.util.Vector;
 
+import Frame.EnvironmentFrame;
+import Frame.UnitVisual.UnitFrame;
+import Frame.UnitVisual.VisualType;
+
 
 public class Overmind extends Unit{
 	
@@ -10,8 +14,11 @@ public class Overmind extends Unit{
 	Overmind(Vector2 pos)
 	{
 		super(pos);
+		_frame = new UnitFrame(VisualType.OVERMIND);
+		EnvironmentFrame.getInstance().addUnit(_frame, (int)pos.getX(), (int)pos.getY());
 		children = new Vector<Swarmodon>();
 		unitType = "Overmind";
+		goal = new Vector2();
 	}
 	
 	public boolean canProduceSwarmodons()

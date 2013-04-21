@@ -19,8 +19,8 @@ enum SwarmideState implements State{
 			//TO DO : Si ennemi proche, on change pour Attack
 			Vector2 newGoal = new Vector2();
 			Random rand = new Random();
-			newGoal.setX(u.getGoal().getX() + (rand.nextInt(4) - 2));
-			newGoal.setY(u.getGoal().getY() + (rand.nextInt(4) - 2));
+			newGoal.setX(u.getGoal().getX() + (rand.nextInt(600) - 300));
+			newGoal.setY(u.getGoal().getY() + (rand.nextInt(600) - 300));
 			u.setGoal(newGoal);
 			u.moveTo(newGoal);
 		}
@@ -28,7 +28,7 @@ enum SwarmideState implements State{
 	GoingTo {
 		public void act(Unit u)
 		{
-			if (u.getPos() == u.getGoal())
+			if (u.getPos().equals(u.getGoal()))
 				((Swarmide)u).changeState(Roam);
 			else
 				u.moveTo(u.getGoal());
@@ -52,7 +52,6 @@ public class Swarmide extends Unit{
 		children = new Vector<Swarmling>();
 		unitType = "Swarmide";
 		speed = Constants.swarmideSpeed;
-		goal = new Vector2();
 		state = SwarmideState.Roam;
 	}
 	

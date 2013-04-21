@@ -10,10 +10,10 @@ public class Constants {
 	public static final int swarmlingsMax = 3;
 	public static final int swarmidesMax = 3;
 	public static final int swarmodonsMax = 4;
-	public static final float swarmlingSpeed = 2.0f;
-	public static final float swarmideSpeed = 1.4f;
+	public static final float swarmlingSpeed = 1.0f;
+	public static final float swarmideSpeed = 1.0f;
 	public static final float swarmodonSpeed = 1.0f;
-	public static final float terranlingSpeed = 2.0f;
-	public static final float terranideSpeed = 1.4f;
-	public static final float terranodonSpeed = 1.0f;
+	public static final float terranlingSpeed = 3.0f;
+	public static final float terranideSpeed = 2.0f;
+	public static final float terranodonSpeed = 1.4f;
 }

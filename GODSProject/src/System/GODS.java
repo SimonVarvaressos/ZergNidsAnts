@@ -20,9 +20,13 @@ public class GODS {
 					//GODS window = new GODS();
 					//window.frame.setVisible(true);
 					
+					Overmind theOvermind = new Overmind(new Vector2(550,180));
 					AppFrame.getInstance().setVisible(true);
-					Swarmling ling = new Swarmling(new Vector2(100,100));
-					ling.setGoal(new Vector2(550, 180));
+					Swarmodon odon = new Swarmodon(new Vector2(550, 180));
+					Swarmide ide = new Swarmide(new Vector2(550, 180));
+					Swarmling ling = new Swarmling(new Vector2(550, 180));
+					odon.changeState(SwarmodonState.GoingTo);
+					ide.changeState(SwarmideState.GoingTo);
 					ling.changeState(SwarmlingState.GoingTo);
 					
 				} catch (Exception e) {
@@ -36,11 +40,6 @@ public class GODS {
 	 * Create the application.
 	 */
 	public GODS() {
-		
-		
-		//Swarmide ide = new Swarmide();
-		//Swarmodon odon = new Swarmodon();
-		
 		
 		initialize();
 		

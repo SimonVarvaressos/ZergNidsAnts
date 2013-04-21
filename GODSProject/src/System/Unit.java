@@ -19,6 +19,7 @@ public abstract class Unit extends Agent {
 		//EnvironmentFrame.getInstance().addUnit(this);
 		//_frame.setLocation((int)pos.getX(), (int)pos.getY());
 		position = pos;
+		goal = new Vector2(180, 180);
 	}
 	
 	public Vector2 getPos()
@@ -27,15 +28,21 @@ public abstract class Unit extends Agent {
 	}
 	public Vector2 getGoal() { return goal; }
 	public void setGoal(Vector2 newGoal) { goal = newGoal;}
+	public String getUnitType() { return unitType; }
 	
 	
 	protected void moveTo(Vector2 destination)
 	{
-		Vector2 direction = new Vector2(destination.getX()- position.getX(), destination.getY()- position.getY());
+		Vector2 direction = new Vector2(destination.getX() - position.getX(), destination.getY() - position.getY());
+		
+		
 		
 		direction.normalize();
 		
+		
 		Vector2 movement = new Vector2(direction.getX()*speed,direction.getY()*speed);
+		
+		//System.out.println(movement.getX() + " and " + movement.getY());
 		
 		position.setX(position.getX()+movement.getX());
 		position.setY(position.getY()+movement.getY());
