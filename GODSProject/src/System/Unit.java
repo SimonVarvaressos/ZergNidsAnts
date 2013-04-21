@@ -56,7 +56,7 @@ public abstract class Unit extends Agent {
 		
 		_frame.setLocation((int)position.getX(), (int)position.getY());
 	}
-
+	
 	public UnitFrame getFrame(){
 		return _frame;
 	}

@@ -24,7 +24,6 @@ import Frame.UnitVisual.VisualType;
 public class OvermindFrame extends JPanel{
 
 	private static final String OVERMIND_PORTRAIT_PATH = "Ressources/OvermindPortrait.png";
-	//private static final String OVERMIND_PORTRAIT_PATH = "UnitVisual/UnitVisualRessources/OvermindIMG.gif";
 	
 	private static final String TXT_TITLE = " OVERMIND ";
 	private static final String TXT_HP = " HP: ";
@@ -51,6 +50,15 @@ public class OvermindFrame extends JPanel{
 	private Label _lblActualEnergy = new Label();
 	private Label _lblMsg = new Label();
 	private Label _lblActualMsg = new Label();
+	
+	private static OvermindFrame _instance;
+
+	public static OvermindFrame getInstance(){
+		if (OvermindFrame._instance == null){
+			OvermindFrame._instance = new OvermindFrame();
+		}
+		return OvermindFrame._instance;
+	}
 	
 	public OvermindFrame(){
 		super();
@@ -101,9 +109,9 @@ public class OvermindFrame extends JPanel{
 	public void updateAllData(int anAmountofHP, int anAmountofEnergy, String aMsg){
 		_lblActualHP.setText(String.valueOf(anAmountofHP));
 		
-		_lblActualHP.setText(String.valueOf(anAmountofEnergy));
+		_lblActualEnergy.setText(String.valueOf(anAmountofEnergy));
 		
-		_lblActualHP.setText(String.valueOf(aMsg));
+		_lblActualMsg.setText(aMsg);
 	}
 	
 	public void updateHP(int anAmountofHP){
@@ -111,11 +119,11 @@ public class OvermindFrame extends JPanel{
 	}
 	
 	public void updateEnergy(int anAmountofEnergy){
-		_lblActualHP.setText(String.valueOf(anAmountofEnergy));
+		_lblActualEnergy.setText(String.valueOf(anAmountofEnergy));
 	}
 	
 	public void updateMsg(String aMsg){
-		_lblActualHP.setText(String.valueOf(aMsg));
+		_lblActualMsg.setText(aMsg);
 	}
 }
 

@@ -175,14 +175,15 @@ public class ToolBar extends JToolBar implements ActionListener{
 		
 		else if(e.getActionCommand() == SWARMICIDE_ACTION)
 		{ 
-			//TODO
+			Overmind.getInstance().swarmicide();
 		} 
 		
 		
 		
 		else if(e.getActionCommand() == OVERDRIVE_ACTION)
 		{
-			//TODO
+			Overmind.getInstance().reset();
+			EnvironmentFrame.getInstance().reset();
 		}
 		
 	}

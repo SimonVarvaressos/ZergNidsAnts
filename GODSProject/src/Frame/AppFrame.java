@@ -29,8 +29,8 @@ public class AppFrame extends JFrame implements WindowListener{
 
 	//components
 	private ToolBar _toolbar = new ToolBar();
-	private OvermindFrame _overmindFrame = new OvermindFrame();
-	private StatisticFrame _stats = new StatisticFrame();
+	//private OvermindFrame _overmindFrame = new OvermindFrame();
+	//private StatisticFrame _stats = new StatisticFrame();
 	//public EnvironmentFrame _environment = new EnvironmentFrame();
 	
 	
@@ -69,13 +69,13 @@ public class AppFrame extends JFrame implements WindowListener{
 		//TODO adjust when the classes are done
 		
 		_SecondPanel.setLayout(_mainWindowSubLayout2);
-		_SecondPanel.add(_overmindFrame, BorderLayout.SOUTH);
+		_SecondPanel.add(OvermindFrame.getInstance(), BorderLayout.SOUTH);
 		_SecondPanel.add(EnvironmentFrame.getInstance(), BorderLayout.CENTER);
 		//_SecondPanel.setPreferredSize(new Dimension(200,450));
 		_SecondPanel.setVisible(true);
 		
 		_PrimePanel.setLayout(_mainWindowSubLayout1);
-		_PrimePanel.add(_stats, BorderLayout.EAST);
+		_PrimePanel.add(StatisticFrame.getInstance(), BorderLayout.EAST);
 		_PrimePanel.add(_SecondPanel, BorderLayout.CENTER);
 		//_PrimePanel.setPreferredSize(new Dimension(200,450));
 		_PrimePanel.setVisible(true);

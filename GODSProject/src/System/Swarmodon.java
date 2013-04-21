@@ -131,10 +131,10 @@ public class Swarmodon extends Unit{
 	private void watchSurroundings(){
 		ArrayList<Unit> _result = EnvironmentFrame.getInstance().lookAround(getXi(), getYi(), _detectionThreshold);
 		if(_result != null){
-			System.out.println("DETECTED");
+			//System.out.println("DETECTED");
 		}
 		else{
-			System.out.println("UNDETECTED");
+			//System.out.println("UNDETECTED");
 		}
 		
 	}

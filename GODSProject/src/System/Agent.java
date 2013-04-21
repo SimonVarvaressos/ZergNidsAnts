@@ -2,6 +2,8 @@ package System;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+import Frame.StatisticFrame;
+
 
 public abstract class Agent extends Thread{
 
@@ -12,7 +14,7 @@ public abstract class Agent extends Thread{
 	{
 		boiteMessages = new ArrayBlockingQueue<Message>(100);
 		isAlive = true;
-		System.out.print("Started");
+		System.out.println("Started");
 		start();
 	}
 	
@@ -21,9 +23,12 @@ public abstract class Agent extends Thread{
 		try {
 			while (isAlive)
 			{
-				checkMessages();
-				act();
-				Thread.sleep(10);
+				if(StatisticFrame.getInstance().isActive())
+				{
+					checkMessages();
+					act();
+					Thread.sleep(10);
+				}
 			}
 			
 		} catch (InterruptedException e) {
@@ -31,6 +36,10 @@ public abstract class Agent extends Thread{
 		}
 	}
 	
+	public void turnOff()
+	{
+		isAlive = false;
+	}
 	
 	protected abstract void checkMessages();
 	protected abstract void act();

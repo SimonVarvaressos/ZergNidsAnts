@@ -14,4 +14,9 @@
 <fullyQualifiedTypeName name="Frame.UnitVisual.VisualType"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="System.Vector2"/>
+<fullyQualifiedTypeName name="System.Constants"/>
+<fullyQualifiedTypeName name="Frame.StatisticFrame"/>
+<fullyQualifiedTypeName name="Frame.OvermindFrame"/>
+<fullyQualifiedTypeName name="javax.swing.Timer"/>
+<fullyQualifiedTypeName name="System.Overmind"/>
 </qualifiedTypeNameHistroy>

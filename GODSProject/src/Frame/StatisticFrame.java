@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import javax.imageio.ImageIO;
@@ -18,10 +19,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.border.TitledBorder;
 
+import System.Constants;
+import System.Overmind;
+import System.Unit;
 
-public class StatisticFrame extends JPanel implements ActionListener{
+
+public class StatisticFrame extends JPanel implements ActionListener,Runnable{
 
 	private static final String TXT_TITLE = " STATISTICS ";
 	
@@ -31,11 +37,11 @@ public class StatisticFrame extends JPanel implements ActionListener{
 	private static final String TXT_DIV = " / ";
 	
 	private static final String TXT_UPKEEP = " Upkeep : ";
-	private static final String TXT_ENERGY = " Upkeep Delay : ";
+	private static final String TXT_DELAY = " Upkeep Delay : ";
 	
 	private static final int INIT_NULL = 0;
-	private static final int INIT_FIRST = 1;
-	private static final String INIT_MSG = " No message at the moment ";
+	private static final float TIMER_MAX = 5.0f;
+	private static final int TIMER = 100;
 	
 	private static final String BTN_ACTION = "STATE_BUTTON";
 	private static final String BTN_TXT_PAUSE = "Pause";
@@ -73,8 +79,23 @@ public class StatisticFrame extends JPanel implements ActionListener{
 	
 	private JButton btnPause = new JButton();
 	
+	private static StatisticFrame _instance;
+	
+	public static boolean _isActive = true;
+	private Thread _timerThread = new Thread(this);
+	private Timer _upkeepTimer = new Timer (TIMER,this);
+	private float _timer = 5.0f;
+
+	public static StatisticFrame getInstance(){
+		if (StatisticFrame._instance == null){
+			StatisticFrame._instance = new StatisticFrame();
+		}
+		return StatisticFrame._instance;
+	}
+	
 	public StatisticFrame(){
 		super();
+		_timerThread.start();
 		initGraphicData();
 	}
 	
@@ -102,13 +123,13 @@ public class StatisticFrame extends JPanel implements ActionListener{
 		_lblBDivide.setAlignment(Label.CENTER);
 		_lblBDivide.setText(TXT_DIV);
 		_lblBMax.setAlignment(Label.CENTER);
-		_lblBMax.setText(String.valueOf(INIT_FIRST));
+		_lblBMax.setText(String.valueOf(Constants.swarmodonsMax));
 		
-		_lblUpkeep.setText(TXT_ENERGY);
+		_lblUpkeep.setText(TXT_UPKEEP);
 		_lblActualUpkeep.setAlignment(Label.RIGHT);
 		_lblActualUpkeep.setText(String.valueOf(INIT_NULL));
 		
-		_lblDelay.setText(TXT_ENERGY);
+		_lblDelay.setText(TXT_DELAY);
 		_lblActualDelay.setAlignment(Label.RIGHT);
 		_lblActualDelay.setText(String.valueOf(INIT_NULL));
 		
@@ -153,6 +174,7 @@ public class StatisticFrame extends JPanel implements ActionListener{
 		this.setVisible(true);
 	}
 	
+	
 	public void updateAllData(int anAmountofS, int anAmountofM, int anAmountofB, int anUpkeep, float aDelay){
 		_lblSCurrent.setText(String.valueOf(anAmountofS));
 		_lblSMax.setText(String.valueOf(anAmountofM * 5));
@@ -161,11 +183,22 @@ public class StatisticFrame extends JPanel implements ActionListener{
 		_lblMMax.setText(String.valueOf(anAmountofB * 3));
 
 		_lblBCurrent.setText(String.valueOf(anAmountofB));
-		_lblBMax.setText(String.valueOf(anAmountofB + 1));
+		_lblBMax.setText(String.valueOf(Constants.swarmodonsMax));
 
 		_lblActualUpkeep.setText(String.valueOf(anUpkeep));
 
 		_lblActualDelay.setText(String.valueOf(aDelay));
+	}
+	
+	public void updateSwarm(int anAmountofS, int anAmountofM, int anAmountofB){
+		_lblSCurrent.setText(String.valueOf(anAmountofS));
+		_lblSMax.setText(String.valueOf(anAmountofM * 5));
+
+		_lblMCurrent.setText(String.valueOf(anAmountofM));
+		_lblMMax.setText(String.valueOf(anAmountofB * 3));
+
+		_lblBCurrent.setText(String.valueOf(anAmountofB));
+		_lblBMax.setText(String.valueOf(Constants.swarmodonsMax));
 	}
 	
 	public void updateSwarmling(int anAmountofS, int anAmountofM){
@@ -180,7 +213,7 @@ public class StatisticFrame extends JPanel implements ActionListener{
 	
 	public void updateSwarmodon(int anAmountofB){
 		_lblBCurrent.setText(String.valueOf(anAmountofB));
-		_lblBMax.setText(String.valueOf(anAmountofB + 1));
+		_lblBMax.setText(String.valueOf(Constants.swarmodonsMax));
 	}
 
 	public void updateUpkeep(int anUpkeep){
@@ -188,14 +221,54 @@ public class StatisticFrame extends JPanel implements ActionListener{
 	}
 	
 	public void updateDelay(float aDelay){
-		_lblActualDelay.setText(String.valueOf(aDelay));
+		_lblActualDelay.setText(String.format("%.1f", aDelay));
+		//String.valueOf(aDelay)
+	}
+	
+	public synchronized boolean isActive(){
+		return _isActive;
+	}
+	
+	private synchronized void switchActive(){
+		if(_isActive){
+			_isActive = false;
+			_upkeepTimer.stop();
+		}
+		else{
+			_isActive = true;
+			_upkeepTimer.start();
+		}
+	}
+	
+	public synchronized void pauseSystem(){
+		//TODO pause prompt
+		if(_isActive){
+			btnPause.setText(BTN_TXT_UNPAUSE);
+		}
+		else{
+			btnPause.setText(BTN_TXT_PAUSE);
+		}
+		switchActive();
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == BTN_ACTION)
 		{  
-			//TODO pause prompt
+			pauseSystem();
 		} 
+		else if (e.getSource() == this._upkeepTimer){
+			_timer = _timer - 0.1f;
+			if(this._timer <= 0.1f){
+				_timer = TIMER_MAX;
+				Overmind.getInstance().payUpkeep();
+			}
+			updateDelay(_timer);
+		}
+	}
+
+	@Override
+	public void run() {
+		_upkeepTimer.start();
 	}
 }

@@ -3,12 +3,16 @@ package Frame;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import Frame.UnitVisual.UnitFrame;
 import Frame.UnitVisual.VisualType;
+import System.Swarmide;
+import System.Swarmling;
+import System.Swarmodon;
 import System.Unit;
 import System.Vector2;
 
@@ -96,6 +100,15 @@ public class EnvironmentFrame extends JPanel{
 
 		_field.validate();
 		_field.repaint();
+	}
+	
+	public void reset(){
+		for (Unit s : _terranList)
+		{
+			s.turnOff();
+			removeUnit(s.getFrame());
+			s = null;
+		}
 	}
 	
 	synchronized public void removeUnit(UnitFrame aUnitFrame){
