@@ -11,10 +11,12 @@ public abstract class Unit extends Agent {
 	protected float life;
 	protected String unitType;
 	protected UnitFrame _frame;
+	protected int _detectionThreshold;
 	
 	Unit(Vector2 pos)
 	{
 		super();
+		_detectionThreshold = 60;
 		//_frame = new UnitFrame();
 		//EnvironmentFrame.getInstance().addUnit(this);
 		//_frame.setLocation((int)pos.getX(), (int)pos.getY());
@@ -57,6 +59,14 @@ public abstract class Unit extends Agent {
 
 	public UnitFrame getFrame(){
 		return _frame;
+	}
+	
+	public int getXi(){
+		return (int)position.getX();
+	}
+	
+	public int getYi(){
+		return (int)position.getY();
 	}
 	
 }

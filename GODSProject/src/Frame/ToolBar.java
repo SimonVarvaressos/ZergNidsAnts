@@ -69,37 +69,19 @@ public class ToolBar extends JToolBar implements ActionListener{
 	public ToolBar(){
 		super();
 		
-		btnAddSLing.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-            {
-                //Execute when button is pressed
-                Overmind.getInstance().produceSwarmling();
-            }
-		});
+		btnAddSLing.addActionListener(this);
 		btnAddSLing.setActionCommand(ASS_ACTION);
 		btnAddSLing.setIcon(new ImageIcon(this.getClass().getResource(SMALL_S_ICON_PATH)));
 		btnAddSLing.setToolTipText(TXT_ADD_SWARMLING);
 		add(this.btnAddSLing);
 		
-		btnAddSIde.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-            {
-                //Execute when button is pressed
-                Overmind.getInstance().produceSwarmide();
-            }
-		});
+		btnAddSIde.addActionListener(this);
 		btnAddSIde.setActionCommand(AMS_ACTION);
 		btnAddSIde.setIcon(new ImageIcon(this.getClass().getResource(MEDIUM_S_ICON_PATH)));
 		btnAddSIde.setToolTipText(TXT_ADD_SWARMIDE);
 		this.add(this.btnAddSIde);
 		
-		btnAddSOdon.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-            {
-                //Execute when button is pressed
-                Overmind.getInstance().produceSwarmodon();
-            }
-		});
+		btnAddSOdon.addActionListener(this);
 		btnAddSOdon.setActionCommand(ABS_ACTION);
 		btnAddSOdon.setIcon(new ImageIcon(this.getClass().getResource(BIG_S_ICON_PATH)));
 		btnAddSOdon.setToolTipText(TXT_ADD_SWARMODON);
@@ -109,38 +91,19 @@ public class ToolBar extends JToolBar implements ActionListener{
 		this.add(new JSeparator(SwingConstants.HORIZONTAL));
 
 		
-		btnAddTLing.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-            {
-				Vector2 vect = new Vector2(0,180);
-                Terranling ling = new Terranling(vect);
-            }
-		});
+		btnAddTLing.addActionListener(this);
 		btnAddTLing.setActionCommand(AST_ACTION);
 		btnAddTLing.setIcon(new ImageIcon(this.getClass().getResource(SMALL_T_ICON_PATH)));
 		btnAddTLing.setToolTipText(TXT_ADD_TERANLING);
 		add(this.btnAddTLing);
 		
-		btnAddTIde.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-            {
-				Vector2 vect = new Vector2(0,180);
-                Terranide ide = new Terranide(vect);
-            }
-		});
+		btnAddTIde.addActionListener(this);
 		btnAddTIde.setActionCommand(AMT_ACTION);
 		btnAddTIde.setIcon(new ImageIcon(this.getClass().getResource(MEDIUM_T_ICON_PATH)));
 		btnAddTIde.setToolTipText(TXT_ADD_TERANIDE);
 		this.add(this.btnAddTIde);
 		
-		btnAddTOdon.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-            {
-                //Execute when button is pressed
-				Vector2 vect = new Vector2(0,180);
-                Terranodon odon = new Terranodon(vect);
-            }
-		});
+		btnAddTOdon.addActionListener(this);
 		btnAddTOdon.setActionCommand(ABT_ACTION);
 		btnAddTOdon.setIcon(new ImageIcon(this.getClass().getResource(BIG_T_ICON_PATH)));
 		btnAddTOdon.setToolTipText(TXT_ADD_TERANODON);
@@ -167,32 +130,56 @@ public class ToolBar extends JToolBar implements ActionListener{
 		
 		if (e.getActionCommand() == ASS_ACTION)
 		{  
-			//TODO
+			Overmind.getInstance().produceSwarmling();
 		} 
+		
+		
+		
 		else if (e.getActionCommand() == AMS_ACTION)
 		{ 
-			//TODO
+			Overmind.getInstance().produceSwarmide();
 		} 
+		
+		
+		
 		else if (e.getActionCommand() == ABS_ACTION)
 		{ 
-			//TODO
+			Overmind.getInstance().produceSwarmodon();
 		} 
+		
+		
+		
 		else if(e.getActionCommand() == AST_ACTION)
 		{
-			//TODO
+			Vector2 vect = new Vector2(0,180);
+			EnvironmentFrame.getInstance().addTeran(new Terranling(vect));
 		}
+		
+		
+		
 		else if (e.getActionCommand() == AMT_ACTION)
 		{
-			//TODO	
+			Vector2 vect = new Vector2(0,180);
+			EnvironmentFrame.getInstance().addTeran(new Terranide(vect));
 		} 
+		
+		
+		
 		else if (e.getActionCommand() == ABT_ACTION)
 		{ 
-			//TODO
+			Vector2 vect = new Vector2(0,180);
+			EnvironmentFrame.getInstance().addTeran(new Terranodon(vect));
 		} 
+		
+		
+		
 		else if(e.getActionCommand() == SWARMICIDE_ACTION)
 		{ 
 			//TODO
 		} 
+		
+		
+		
 		else if(e.getActionCommand() == OVERDRIVE_ACTION)
 		{
 			//TODO

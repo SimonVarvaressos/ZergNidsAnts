@@ -12,4 +12,6 @@
 <fullyQualifiedTypeName name="Frame.UnitVisual.UnitFrame"/>
 <fullyQualifiedTypeName name="java.awt.Component"/>
 <fullyQualifiedTypeName name="Frame.UnitVisual.VisualType"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="System.Vector2"/>
 </qualifiedTypeNameHistroy>

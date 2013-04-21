@@ -2,6 +2,7 @@ package Frame;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
@@ -9,6 +10,7 @@ import javax.swing.border.TitledBorder;
 import Frame.UnitVisual.UnitFrame;
 import Frame.UnitVisual.VisualType;
 import System.Unit;
+import System.Vector2;
 
 // !!! -> size of environment : max x = 568     max y = 389
 
@@ -28,6 +30,8 @@ public class EnvironmentFrame extends JPanel{
 	private static EnvironmentFrame _instance;
 	//private Thread _threadified = new Thread(this);
 	
+	private ArrayList<Unit> _terranList = new ArrayList<Unit>();
+	private ArrayList<Unit> _swarmList = new ArrayList<Unit>();
 	
 	public static EnvironmentFrame getInstance(){
 		if (EnvironmentFrame._instance == null){
@@ -50,6 +54,40 @@ public class EnvironmentFrame extends JPanel{
 		this.add(_field,BorderLayout.CENTER);
 
 		//addUnit(_overlord, 545, 170);
+	}
+	
+	synchronized public void addTeran(Unit aUnit){
+		_terranList.add(aUnit);
+	}
+	
+	synchronized public void addSwarm(Unit aUnit){
+		_swarmList.add(aUnit);
+	}
+	
+	synchronized public ArrayList<Unit> lookAround(int aOriginX, int aOriginY, int aThreshold){
+		ArrayList<Unit> _result = null;
+	
+		for(int i=0;i<_terranList.size();i++){
+			
+			int tempX = Math.abs(_terranList.get(i).getXi() - aOriginX);
+			int tempY = Math.abs(_terranList.get(i).getYi() - aOriginY);
+			
+			if( tempX + tempY  <= aThreshold)
+			{
+				if(_result == null)
+				{
+					_result = new ArrayList<Unit>();
+				}
+				_result.add(_terranList.get(i));
+				
+				//to remove after detection tests
+				_terranList.get(i).getFrame().updateVisualType(VisualType.D_TERANLING);
+				_field.validate();
+				_field.repaint();
+			}
+		}
+		
+		return _result;
 	}
 	
 	synchronized public void addUnit(UnitFrame aUnitFrame,int aX, int aY){

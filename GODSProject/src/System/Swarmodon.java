@@ -1,4 +1,5 @@
 package System;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
 
@@ -113,6 +114,7 @@ public class Swarmodon extends Unit{
 	protected void act() {
 		if (state != null)
 		{
+			watchSurroundings();
 			state.act(this);
 			//System.out.println("Yolo");
 		}
@@ -124,6 +126,17 @@ public class Swarmodon extends Unit{
 		{
 			s.receiveMessage(m);
 		}
+	}
+	
+	private void watchSurroundings(){
+		ArrayList<Unit> _result = EnvironmentFrame.getInstance().lookAround(getXi(), getYi(), _detectionThreshold);
+		if(_result != null){
+			System.out.println("DETECTED");
+		}
+		else{
+			System.out.println("UNDETECTED");
+		}
+		
 	}
 
 }

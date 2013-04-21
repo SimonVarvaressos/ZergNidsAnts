@@ -39,7 +39,7 @@ public class UnitFrame extends JPanel{
 	public void updateVisualType(VisualType aVisualType){
 		_VisualType = aVisualType;
 		this.setSize(aVisualType.size(), aVisualType.size());
-		_ImgLabel = new JLabel(new ImageIcon(this.getClass().getResource(aVisualType.path())));
+		_ImgLabel.setIcon(new ImageIcon(this.getClass().getResource(aVisualType.path())));
 	}
 	
 	public String toString(){
