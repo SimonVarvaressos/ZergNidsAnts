@@ -75,7 +75,13 @@ public class Terranide extends Unit{
 	}
 
 	@Override
-	protected void destroyUnit(){
+	public synchronized void defeated(){
+		EnvironmentFrame.getInstance().addEnergyFromDefeatedTeran(this);
+		//EnvironmentFrame.getInstance().destroyTeranUnit(this);
+	}
+	
+	@Override
+	protected synchronized void destroyUnit(){
 		EnvironmentFrame.getInstance().destroyTeranUnit(this);
 	}
 	

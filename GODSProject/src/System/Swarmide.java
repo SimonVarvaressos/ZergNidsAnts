@@ -11,17 +11,22 @@ enum SwarmideState implements State{
 	Attack {
 		public void act(Unit u)
 		{
-			ArrayList<Unit> ennemies = u.watchSurroundings();
+			/*ArrayList<Unit> ennemies = u.watchSurroundings();
 			if (ennemies != null)
 			{
-				((Swarmide)u).changeState(Attack);
+				//((Swarmide)u).changeState(Attack);
+				
+				if(((Swarmide)u).isCloseEnoughTo(((Swarmide)u).goal)){		
+					ennemies.get(0).takesDmg(1);
+				}
+				
 				u.setGoal(ennemies.get(0).getPos());
 				u.moveTo(u.getGoal());
 			}
 			else
 			{
 				((Swarmide)u).changeState(Roam);
-			}
+			}*/
 		}
 	},
 	Roam {
@@ -147,6 +152,11 @@ public class Swarmide extends Unit{
 				Message newM = new Message(TypeMessage.Loot, m.position, "Swarmling");
 				sendMessageToSwarmlings(newM);
 			}
+			else if (m.type == TypeMessage.Loot)
+			{
+				Message newM = new Message(TypeMessage.Loot, m.position, "Swarmling");
+				sendMessageToSwarmlings(newM);
+			}
 		}
 		
 	}
@@ -182,7 +192,12 @@ public class Swarmide extends Unit{
 	}
 	
 	@Override
-	protected void destroyUnit(){
+	public synchronized void defeated(){
+		destroyUnit();
+	}
+	
+	@Override
+	protected synchronized void destroyUnit(){
 		for (Swarmling s2 : children)
 		{
 			s2.destroyUnit();

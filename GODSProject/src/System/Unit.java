@@ -93,5 +93,37 @@ public abstract class Unit extends Agent {
 		
 	}
 
+	protected ArrayList<EnergyBall> watchSurroundingsForFood(){
+		ArrayList<EnergyBall> _result = EnvironmentFrame.getInstance().lookAroundForFood(getXi(), getYi(), _detectionThreshold);
+		if(_result != null){
+			return _result;
+		}
+		else{
+			return null;
+		}
+		
+	}
+	
+	public boolean isCloseEnoughTo(Vector2 aPos){
+		int tempX = Math.abs((int)(position.getX() - aPos.getX()));
+		int tempY = Math.abs((int)(position.getY() - aPos.getY()));
+		
+		if( tempX + tempY  <= 5)
+		{
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	synchronized public void takesDmg(int aDmgAmount){
+		life--;
+		if(life <= 0){
+			defeated();
+		}
+	}
+	
+	public abstract void defeated();
 	protected abstract void destroyUnit();
 }

@@ -179,9 +179,8 @@ public class Overmind extends Unit{
 			s = null;
 		}
 		children.clear();
+		EnvironmentFrame.getInstance().clearSwarm();
 		System.gc();
-		
-		
 		
 		StatisticFrame.getInstance().updateSwarm(0, 0, 0);
 		OvermindFrame.getInstance().updateEnergy(energy);
@@ -248,6 +247,11 @@ public class Overmind extends Unit{
 		
 	}
 	
+	public synchronized void resplenishEnergy(){
+		energy = energy + 50;
+		OvermindFrame.getInstance().updateEnergy(energy);
+	}
+	
 	public synchronized void setUpkeep(){
 		int i = 0;
 		int j = 0;
@@ -298,7 +302,12 @@ public class Overmind extends Unit{
 	}
 
 	@Override
-	protected void destroyUnit(){
+	public synchronized void defeated(){
+
+	}
+	
+	@Override
+	protected synchronized void destroyUnit(){
 		
 	}
 }

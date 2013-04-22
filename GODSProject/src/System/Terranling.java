@@ -65,6 +65,7 @@ public class Terranling extends Unit {
 		_frame = new UnitFrame(VisualType.TERANLING);
 		EnvironmentFrame.getInstance().addUnit(_frame, (int)pos.getX(), (int)pos.getY());
 		
+		life = 100;
 		speed = Constants.terranlingSpeed;
 		state = TerranlingState.Roam;
 	}
@@ -74,7 +75,13 @@ public class Terranling extends Unit {
 	}
 
 	@Override
-	protected void destroyUnit(){
+	public synchronized void defeated(){
+		EnvironmentFrame.getInstance().addEnergyFromDefeatedTeran(this);
+		EnvironmentFrame.getInstance().destroyTeranUnit(this);
+	}
+	
+	@Override
+	protected synchronized void destroyUnit(){
 		EnvironmentFrame.getInstance().destroyTeranUnit(this);
 	}
 	

@@ -2,6 +2,7 @@ package Frame;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -10,9 +11,12 @@ import javax.swing.border.TitledBorder;
 
 import Frame.UnitVisual.UnitFrame;
 import Frame.UnitVisual.VisualType;
+import System.EnergyBall;
 import System.Swarmide;
 import System.Swarmling;
 import System.Swarmodon;
+import System.Terranide;
+import System.Terranling;
 import System.Unit;
 import System.Vector2;
 
@@ -36,6 +40,7 @@ public class EnvironmentFrame extends JPanel{
 	
 	private ArrayList<Unit> _terranList = new ArrayList<Unit>();
 	private ArrayList<Unit> _swarmList = new ArrayList<Unit>();
+	private ArrayList<EnergyBall> _energyList = new ArrayList<EnergyBall>();
 	
 	public static EnvironmentFrame getInstance(){
 		if (EnvironmentFrame._instance == null){
@@ -68,9 +73,11 @@ public class EnvironmentFrame extends JPanel{
 		_swarmList.add(aUnit);
 	}
 	
-	synchronized public void removeSwarm(Unit aUnit){
-		_swarmList.remove(aUnit);
+	synchronized public void addEnergy(EnergyBall aEnergyBall){
+		_energyList.add(aEnergyBall);
 	}
+	
+
 	
 	synchronized public ArrayList<Unit> lookAroundS(int aOriginX, int aOriginY, int aThreshold){
 		ArrayList<Unit> _result = null;
@@ -88,10 +95,6 @@ public class EnvironmentFrame extends JPanel{
 				}
 				_result.add(_terranList.get(i));
 				
-				//to remove after detection tests
-				//_terranList.get(i).getFrame().updateVisualType(VisualType.D_TERANLING);
-				//_field.validate();
-				//_field.repaint();
 			}
 		}
 		
@@ -114,10 +117,28 @@ public class EnvironmentFrame extends JPanel{
 				}
 				_result.add(_swarmList.get(i));
 				
-				//to remove after detection tests
-				//_swarmList.get(i).getFrame().updateVisualType(VisualType.D_TERANLING);
-				//_field.validate();
-				//_field.repaint();
+			}
+		}
+		
+		return _result;
+	}
+	
+	synchronized public ArrayList<EnergyBall> lookAroundForFood(int aOriginX, int aOriginY, int aThreshold){
+		ArrayList<EnergyBall> _result = null;
+	
+		for(int i=0;i<_energyList.size();i++){
+			
+			int tempX = Math.abs(_energyList.get(i).getXi() - aOriginX);
+			int tempY = Math.abs(_energyList.get(i).getYi() - aOriginY);
+			
+			if( tempX + tempY  <= aThreshold)
+			{
+				if(_result == null)
+				{
+					_result = new ArrayList<EnergyBall>();
+				}
+				_result.add(_energyList.get(i));
+				
 			}
 		}
 		
@@ -132,13 +153,23 @@ public class EnvironmentFrame extends JPanel{
 		_field.repaint();
 	}
 	
-	public void reset(){
+	public synchronized void reset(){
 		for (Unit s : _terranList)
 		{
 			s.turnOff();
 			removeUnit(s.getFrame());
+			
+			s.defeated();
+			
 			s = null;
 		}
+		_terranList.clear();
+		_swarmList.clear();
+		System.gc();
+	}
+	
+	synchronized public void clearSwarm(){
+		_swarmList.clear();
 	}
 	
 	synchronized public void removeUnit(UnitFrame aUnitFrame){
@@ -148,12 +179,61 @@ public class EnvironmentFrame extends JPanel{
 		_field.repaint();
 	}
 	
+	synchronized public void removeSwarm(Unit aUnit){
+		_swarmList.remove(aUnit);
+	}
+	
+	synchronized public void addEnergyFromDefeatedTeran(Unit aUnit){
+		
+		EnergyBall temp;
+		if(aUnit instanceof Terranling){
+			temp = new EnergyBall(4, aUnit.getXi(), aUnit.getYi());
+		}
+		else if(aUnit instanceof Terranide){
+			temp = new EnergyBall(8, aUnit.getXi(), aUnit.getYi());
+		}
+		else{
+			temp = new EnergyBall(12, aUnit.getXi(), aUnit.getYi());
+		}
+		
+		addUnit(temp.getFrame(), temp.getXi(), temp.getYi());
+		_energyList.add(temp);
+		//destroyTeranUnit(aUnit);
+	}
+	
 	synchronized public void destroyTeranUnit(Unit aUnit){
 		aUnit.turnOff();
 		removeUnit(aUnit.getFrame());
-		_terranList.remove(aUnit);
+		System.out.println("Test: " + _terranList.remove(aUnit));
 		aUnit = null;
 		System.gc();
+	}
+	
+	synchronized public boolean validFoodSource(Vector2 aLocation){
+		for(int i=0;i<_energyList.size();i++){
+			if((_energyList.get(i).getXi() == aLocation.getX())&&(_energyList.get(i).getYi() == aLocation.getY()))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	synchronized public void takeFoodFromSource(Vector2 aLocation){
+		for(int i=0;i<_energyList.size();i++){
+			if((_energyList.get(i).getXi() == aLocation.getX())&&(_energyList.get(i).getYi() == aLocation.getY()))
+			{
+				_energyList.get(i).takeFoodUnit();
+				return;
+			}
+		}
+	}
+	
+	
+	synchronized public void removeEnergyBall(EnergyBall aEnergyBall){
+		_energyList.remove(aEnergyBall);
+		removeUnit(aEnergyBall.getFrame());
+		aEnergyBall = null;
 	}
 
 }
