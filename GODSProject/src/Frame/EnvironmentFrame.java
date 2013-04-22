@@ -68,7 +68,11 @@ public class EnvironmentFrame extends JPanel{
 		_swarmList.add(aUnit);
 	}
 	
-	synchronized public ArrayList<Unit> lookAround(int aOriginX, int aOriginY, int aThreshold){
+	synchronized public void removeSwarm(Unit aUnit){
+		_swarmList.remove(aUnit);
+	}
+	
+	synchronized public ArrayList<Unit> lookAroundS(int aOriginX, int aOriginY, int aThreshold){
 		ArrayList<Unit> _result = null;
 	
 		for(int i=0;i<_terranList.size();i++){
@@ -85,9 +89,35 @@ public class EnvironmentFrame extends JPanel{
 				_result.add(_terranList.get(i));
 				
 				//to remove after detection tests
-				_terranList.get(i).getFrame().updateVisualType(VisualType.D_TERANLING);
-				_field.validate();
-				_field.repaint();
+				//_terranList.get(i).getFrame().updateVisualType(VisualType.D_TERANLING);
+				//_field.validate();
+				//_field.repaint();
+			}
+		}
+		
+		return _result;
+	}
+	
+	synchronized public ArrayList<Unit> lookAroundT(int aOriginX, int aOriginY, int aThreshold){
+		ArrayList<Unit> _result = null;
+	
+		for(int i=0;i<_swarmList.size();i++){
+			
+			int tempX = Math.abs(_swarmList.get(i).getXi() - aOriginX);
+			int tempY = Math.abs(_swarmList.get(i).getYi() - aOriginY);
+			
+			if( tempX + tempY  <= aThreshold)
+			{
+				if(_result == null)
+				{
+					_result = new ArrayList<Unit>();
+				}
+				_result.add(_swarmList.get(i));
+				
+				//to remove after detection tests
+				//_swarmList.get(i).getFrame().updateVisualType(VisualType.D_TERANLING);
+				//_field.validate();
+				//_field.repaint();
 			}
 		}
 		
@@ -125,5 +155,5 @@ public class EnvironmentFrame extends JPanel{
 		aUnit = null;
 		System.gc();
 	}
-	
+
 }

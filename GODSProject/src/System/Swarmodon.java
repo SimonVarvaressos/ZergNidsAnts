@@ -11,7 +11,17 @@ enum SwarmodonState implements State {
 	Attack {
 		public void act(Unit u)
 		{
-			//TO DO
+			ArrayList<Unit> ennemies = u.watchSurroundings();
+			if (ennemies != null)
+			{
+				((Swarmodon)u).changeState(Attack);
+				u.setGoal(ennemies.get(0).getPos());
+				u.moveTo(u.getGoal());
+			}
+			else
+			{
+				((Swarmodon)u).changeState(Roam);
+			}
 		}
 	},
 	Roam {
@@ -24,11 +34,29 @@ enum SwarmodonState implements State {
 			newGoal.setY(u.getGoal().getY() + (rand.nextInt(600) - 300));
 			u.setGoal(newGoal);
 			u.moveTo(newGoal);
+			
+			ArrayList<Unit> ennemies = u.watchSurroundings();
+			if (ennemies != null)
+			{
+				((Swarmodon)u).changeState(Attack);
+				u.setGoal(ennemies.get(0).getPos());
+				Message m = new Message(TypeMessage.GoTo, u.getGoal(), "Swarmide");
+				((Swarmodon)u).sendMessageToSwarmides(m);
+			}
 		}
 	},
 	GoingTo {
 		public void act(Unit u)
 		{
+			ArrayList<Unit> ennemies = u.watchSurroundings();
+			if (ennemies != null)
+			{
+				((Swarmodon)u).changeState(Attack);
+				u.setGoal(ennemies.get(0).getPos());
+				Message m = new Message(TypeMessage.GoTo, u.getGoal(), "Swarmide");
+				((Swarmodon)u).sendMessageToSwarmides(m);
+			}
+			
 			if (u.getPos().equals(u.getGoal()))
 				((Swarmodon)u).changeState(Roam);
 			else
@@ -43,7 +71,7 @@ public class Swarmodon extends Unit{
 	private Vector<Swarmide> children;
 	private SwarmodonState state;
 	
-	Swarmodon(Vector2 pos)
+	Swarmodon(Vector2 pos, Overmind b)
 	{
 		super(pos);
 		
@@ -54,6 +82,7 @@ public class Swarmodon extends Unit{
 		unitType = "Swarmodon";
 		speed = Constants.swarmodonSpeed;
 		state = SwarmodonState.Roam;
+		boss = b;
 	}
 	
 	public void changeState(SwarmodonState newState) {
@@ -84,7 +113,7 @@ public class Swarmodon extends Unit{
 		if (!boiteMessages.isEmpty())
 		{
 			Message m = boiteMessages.remove();
-			System.out.println("Swarmodon received message - " + m.type.toString());
+			//System.out.println("Swarmodon received message - " + m.type.toString());
 			if (m.destinataire == "Swarmide" && m.destinataire == "Swarmling")
 			{
 				sendMessageToSwarmides(m);
@@ -105,6 +134,14 @@ public class Swarmodon extends Unit{
 			{
 				goal = m.position;
 				state = SwarmodonState.GoingTo;
+			}
+			else if (m.type == TypeMessage.EnnemyDetected)
+			{
+				Message newM = new Message(TypeMessage.Attack, m.position, "Swarmide");
+				sendMessageToSwarmides(newM);
+				//System.out.println("SWARMODON ENNEMYDETECTED!");
+				//setGoal(m.position);
+				//changeState(SwarmideState.GoingTo);
 			}
 		}
 		
@@ -128,16 +165,7 @@ public class Swarmodon extends Unit{
 		}
 	}
 	
-	private void watchSurroundings(){
-		ArrayList<Unit> _result = EnvironmentFrame.getInstance().lookAround(getXi(), getYi(), _detectionThreshold);
-		if(_result != null){
-			//System.out.println("DETECTED");
-		}
-		else{
-			//System.out.println("UNDETECTED");
-		}
-		
-	}
+	
 	
 	public void destroyChild(Swarmide aSwarmide){
 		aSwarmide.isAlive = false;
@@ -153,6 +181,7 @@ public class Swarmodon extends Unit{
 		{
 			s2.destroyUnit();
 		}
+		EnvironmentFrame.getInstance().removeSwarm(this);
 		boss.destroyChild(this);
 	}
 }

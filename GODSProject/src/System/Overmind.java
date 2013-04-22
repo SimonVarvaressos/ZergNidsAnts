@@ -67,9 +67,10 @@ public class Overmind extends Unit{
 		else{
 			if (canProduceSwarmodons())
 			{
-				Swarmodon s = new Swarmodon(position);
+				Swarmodon s = new Swarmodon(position, this);
 				
 				children.add(s);
+				EnvironmentFrame.getInstance().addSwarm(s);
 				
 				energy = energy - Constants.swarmodonCost;
 				OvermindFrame.getInstance().updateEnergy(energy);
@@ -92,8 +93,9 @@ public class Overmind extends Unit{
 			{
 				if (s.canProduceSwarmide())
 				{
-					Swarmide ide = new Swarmide(position);
+					Swarmide ide = new Swarmide(position, s);
 					s.addSwarmide(ide);
+					EnvironmentFrame.getInstance().addSwarm(ide);
 					updateStats();
 					
 					energy = energy - Constants.swarmideCost;
@@ -121,7 +123,8 @@ public class Overmind extends Unit{
 					i++;
 					if (s2.canProduceSwarmlings())
 					{
-						Swarmling ing = new Swarmling(position);
+						Swarmling ing = new Swarmling(position, s2);
+						EnvironmentFrame.getInstance().addSwarm(ing);
 						s2.addSwarmling(ing);
 						updateStats();
 						

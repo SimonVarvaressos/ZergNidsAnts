@@ -1,5 +1,7 @@
 package System;
 
+import java.util.ArrayList;
+
 import Frame.EnvironmentFrame;
 import Frame.UnitVisual.UnitFrame;
 
@@ -67,6 +69,28 @@ public abstract class Unit extends Agent {
 	
 	public int getYi(){
 		return (int)position.getY();
+	}
+	
+	protected ArrayList<Unit> watchSurroundings(){
+		ArrayList<Unit> _result = EnvironmentFrame.getInstance().lookAroundS(getXi(), getYi(), _detectionThreshold);
+		if(_result != null){
+			return _result;
+		}
+		else{
+			return null;
+		}
+		
+	}
+	
+	protected ArrayList<Unit> watchSurroundingsT(){
+		ArrayList<Unit> _result = EnvironmentFrame.getInstance().lookAroundT(getXi(), getYi(), _detectionThreshold);
+		if(_result != null){
+			return _result;
+		}
+		else{
+			return null;
+		}
+		
 	}
 
 	protected abstract void destroyUnit();

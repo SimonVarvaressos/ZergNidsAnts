@@ -1,4 +1,5 @@
 package System;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
 
@@ -11,7 +12,17 @@ enum SwarmlingState implements State
 	Attack {
 		public void act(Unit u)
 		{
-			//TO DO
+			ArrayList<Unit> ennemies = u.watchSurroundings();
+			if (ennemies != null)
+			{
+				((Swarmling)u).changeState(Attack);
+				u.setGoal(ennemies.get(0).getPos());
+				u.moveTo(u.getGoal());
+			}
+			else
+			{
+				((Swarmling)u).changeState(Roam);
+			}
 		}
 	},
 	Roam {
@@ -27,11 +38,29 @@ enum SwarmlingState implements State
 			newGoal.setY(u.getGoal().getY() + (rand.nextInt(600) - 300));
 			u.setGoal(newGoal);
 			u.moveTo(u.getGoal()); 
+			
+			ArrayList<Unit> ennemies = u.watchSurroundings();
+			if (ennemies != null)
+			{
+				((Swarmling)u).changeState(Attack);
+				u.setGoal(ennemies.get(0).getPos());
+				Message m = new Message(TypeMessage.EnnemyDetected, u.getGoal(), "Swarmide");
+				((Swarmling)u).sendMessagetoBoss(m);
+			}
 		}
 	},
 	GoingTo {
 		public void act(Unit u)
 		{
+			ArrayList<Unit> ennemies = u.watchSurroundings();
+			if (ennemies != null)
+			{
+				((Swarmling)u).changeState(Attack);
+				u.setGoal(ennemies.get(0).getPos());
+				Message m = new Message(TypeMessage.EnnemyDetected, u.getGoal(), "Swarmide");
+				((Swarmling)u).sendMessagetoBoss(m);
+			}
+			
 			if (u.getPos().equals(u.getGoal()))
 				((Swarmling)u).changeState(Roam);
 			else
@@ -55,7 +84,7 @@ public class Swarmling extends Unit{
 	
 	
 	
-	Swarmling(Vector2 pos)
+	Swarmling(Vector2 pos, Swarmide b)
 	{
 		super(pos);
 		_frame = new UnitFrame(VisualType.SWARMLING);
@@ -63,6 +92,7 @@ public class Swarmling extends Unit{
 		unitType = "Swarmling";
 		speed = Constants.swarmlingSpeed;
 		state = SwarmlingState.Roam;
+		boss = b;
 	}
 	
 	public void changeState(SwarmlingState newState)
@@ -75,11 +105,10 @@ public class Swarmling extends Unit{
 		if (!boiteMessages.isEmpty())
 		{
 			Message m = boiteMessages.remove();
-			System.out.println("Swarmling received message - " + m.type.toString());
 			if (m.type == TypeMessage.Attack)
 			{
 				goal = m.position;
-				state = SwarmlingState.Attack;
+				state = SwarmlingState.GoingTo;
 			}
 			else if (m.type == TypeMessage.GoTo)
 			{
@@ -112,6 +141,8 @@ public class Swarmling extends Unit{
 	
 	@Override
 	protected void destroyUnit(){
+		EnvironmentFrame.getInstance().removeSwarm(this);
 		boss.destroyChild(this);
+		
 	}
 }

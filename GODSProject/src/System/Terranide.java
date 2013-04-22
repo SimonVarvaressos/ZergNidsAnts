@@ -1,4 +1,5 @@
 package System;
+import java.util.ArrayList;
 import java.util.Random;
 
 import Frame.EnvironmentFrame;
@@ -10,7 +11,17 @@ enum TerranideState implements State{
 	Attack {
 		public void act(Unit u)
 		{
-			//TO DO
+			ArrayList<Unit> ennemies = u.watchSurroundingsT();
+			if (ennemies != null)
+			{
+				((Terranide)u).changeState(Attack);
+				u.setGoal(ennemies.get(0).getPos());
+				u.moveTo(u.getGoal());
+			}
+			else
+			{
+				((Terranide)u).changeState(Roam);
+			}
 		}
 	},
 	Roam {
@@ -23,6 +34,13 @@ enum TerranideState implements State{
 			newGoal.setY(u.getGoal().getY() + (rand.nextInt(600) - 300));
 			u.setGoal(newGoal);
 			u.moveTo(newGoal);
+			
+			ArrayList<Unit> ennemies = u.watchSurroundingsT();
+			if (ennemies != null)
+			{
+				((Terranide)u).changeState(Attack);
+				u.setGoal(ennemies.get(0).getPos());
+			}
 		}
 	},
 	GoingTo {

@@ -44,9 +44,10 @@ public abstract class Agent extends Thread{
 	protected abstract void checkMessages();
 	protected abstract void act();
 	
-	public void receiveMessage(Message m)
+	public synchronized void receiveMessage(Message m)
 	{
-		boiteMessages.add(m);
+		if (boiteMessages.remainingCapacity() != 0)
+			boiteMessages.add(m);
 	}
 	
 	
