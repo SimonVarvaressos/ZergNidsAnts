@@ -14,7 +14,12 @@ enum TerranlingState implements State{
 			ArrayList<Unit> ennemies = u.watchSurroundingsT();
 			if (ennemies != null)
 			{
-				((Terranling)u).changeState(Attack);
+				//((Terranling)u).changeState(Attack);
+				
+				if(((Terranling)u).isCloseEnoughTo(((Terranling)u).goal)){		
+					ennemies.get(0).takesDmg(3);
+				}
+				
 				u.setGoal(ennemies.get(0).getPos());
 				u.moveTo(u.getGoal());
 			}
@@ -46,7 +51,7 @@ enum TerranlingState implements State{
 	GoingTo {
 		public void act(Unit u)
 		{
-			if (u.getPos().equals(u.getGoal()))
+			if (u.isCloseEnoughTo(u.getGoal()))
 				((Terranling)u).changeState(Roam);
 			else
 				u.moveTo(u.getGoal());
@@ -73,7 +78,7 @@ public class Terranling extends Unit {
 	public void changeState(TerranlingState newState) {
 		state = newState;
 	}
-
+	
 	@Override
 	public synchronized void defeated(){
 		EnvironmentFrame.getInstance().addEnergyFromDefeatedTeran(this);

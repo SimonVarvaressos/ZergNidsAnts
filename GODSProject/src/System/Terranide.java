@@ -14,7 +14,12 @@ enum TerranideState implements State{
 			ArrayList<Unit> ennemies = u.watchSurroundingsT();
 			if (ennemies != null)
 			{
-				((Terranide)u).changeState(Attack);
+				//((Terranide)u).changeState(Attack);
+				
+				if(((Terranide)u).isCloseEnoughTo(((Terranide)u).goal)){		
+					ennemies.get(0).takesDmg(2);
+				}
+				
 				u.setGoal(ennemies.get(0).getPos());
 				u.moveTo(u.getGoal());
 			}
@@ -46,7 +51,7 @@ enum TerranideState implements State{
 	GoingTo {
 		public void act(Unit u)
 		{
-			if (u.getPos().equals(u.getGoal()))
+			if (u.isCloseEnoughTo(u.getGoal()))
 				((Terranide)u).changeState(Roam);
 			else
 				u.moveTo(u.getGoal());
@@ -62,6 +67,7 @@ public class Terranide extends Unit{
 	{
 		super(pos);
 		
+		life = 500;
 		_frame = new UnitFrame(VisualType.TERANIDE);
 		EnvironmentFrame.getInstance().addUnit(_frame, (int)pos.getX(), (int)pos.getY());
 		
@@ -77,7 +83,7 @@ public class Terranide extends Unit{
 	@Override
 	public synchronized void defeated(){
 		EnvironmentFrame.getInstance().addEnergyFromDefeatedTeran(this);
-		//EnvironmentFrame.getInstance().destroyTeranUnit(this);
+		EnvironmentFrame.getInstance().destroyTeranUnit(this);
 	}
 	
 	@Override

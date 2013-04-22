@@ -42,7 +42,7 @@ public class Overmind extends Unit{
 			return false;
 	}
 	
-	private void updateStats(){
+	public synchronized void updateStats(){
 		int i = 0;
 		int j = 0;
 		for (Swarmodon s : children)
@@ -275,6 +275,7 @@ public class Overmind extends Unit{
 		children.remove(aSwarmodon);
 		aSwarmodon = null;
 		System.gc();
+		updateStats();
 	}
 	
 	protected void checkMessages()

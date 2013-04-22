@@ -11,13 +11,13 @@ enum SwarmideState implements State{
 	Attack {
 		public void act(Unit u)
 		{
-			/*ArrayList<Unit> ennemies = u.watchSurroundings();
+			ArrayList<Unit> ennemies = u.watchSurroundings();
 			if (ennemies != null)
 			{
 				//((Swarmide)u).changeState(Attack);
 				
 				if(((Swarmide)u).isCloseEnoughTo(((Swarmide)u).goal)){		
-					ennemies.get(0).takesDmg(1);
+					ennemies.get(0).takesDmg(4);
 				}
 				
 				u.setGoal(ennemies.get(0).getPos());
@@ -26,7 +26,7 @@ enum SwarmideState implements State{
 			else
 			{
 				((Swarmide)u).changeState(Roam);
-			}*/
+			}
 		}
 	},
 	Roam {
@@ -62,7 +62,7 @@ enum SwarmideState implements State{
 				((Swarmide)u).sendMessagetoBoss(m);
 			}
 			
-			if (u.getPos().equals(u.getGoal()))
+			if (u.isCloseEnoughTo(u.getGoal()))
 				((Swarmide)u).changeState(Roam);
 			else
 				u.moveTo(u.getGoal());
@@ -80,6 +80,7 @@ public class Swarmide extends Unit{
 	{
 		super(pos);
 		
+		life = 700;
 		_frame = new UnitFrame(VisualType.SWARMIDE);
 		EnvironmentFrame.getInstance().addUnit(_frame, (int)pos.getX(), (int)pos.getY());
 		
@@ -133,7 +134,7 @@ public class Swarmide extends Unit{
 			if (m.type == TypeMessage.Attack)
 			{
 				goal = m.position;
-				state = SwarmideState.GoingTo;
+				state = SwarmideState.Attack;
 			}
 			else if (m.type == TypeMessage.GoTo)
 			{
@@ -189,6 +190,7 @@ public class Swarmide extends Unit{
 		children.remove(aSwarmling);
 		aSwarmling = null;
 		System.gc();
+		Overmind.getInstance().updateStats();
 	}
 	
 	@Override
@@ -198,9 +200,11 @@ public class Swarmide extends Unit{
 	
 	@Override
 	protected synchronized void destroyUnit(){
-		for (Swarmling s2 : children)
-		{
-			s2.destroyUnit();
+		
+		for(int j=0;j<children.size();j++){
+			if(children.get(j) != null){
+				children.get(j).destroyUnit();
+			}
 		}
 		EnvironmentFrame.getInstance().removeSwarm(this);
 		boss.destroyChild(this);

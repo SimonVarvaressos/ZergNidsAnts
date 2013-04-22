@@ -11,13 +11,13 @@ enum SwarmodonState implements State {
 	Attack {
 		public void act(Unit u)
 		{
-			/*ArrayList<Unit> ennemies = u.watchSurroundings();
+			ArrayList<Unit> ennemies = u.watchSurroundings();
 			if (ennemies != null)
 			{
 				//((Swarmodon)u).changeState(Attack);
 				
 				if(((Swarmodon)u).isCloseEnoughTo(((Swarmodon)u).goal)){		
-					ennemies.get(0).takesDmg(1);
+					ennemies.get(0).takesDmg(8);
 				}
 				
 				u.setGoal(ennemies.get(0).getPos());
@@ -26,7 +26,7 @@ enum SwarmodonState implements State {
 			else
 			{
 				((Swarmodon)u).changeState(Roam);
-			}*/
+			}
 		}
 	},
 	Roam {
@@ -62,7 +62,7 @@ enum SwarmodonState implements State {
 				((Swarmodon)u).sendMessageToSwarmides(m);
 			}
 			
-			if (u.getPos().equals(u.getGoal()))
+			if (u.isCloseEnoughTo(u.getGoal()))
 				((Swarmodon)u).changeState(Roam);
 			else
 				u.moveTo(u.getGoal());
@@ -80,6 +80,7 @@ public class Swarmodon extends Unit{
 	{
 		super(pos);
 		
+		life = 1750;
 		_frame = new UnitFrame(VisualType.SWARMODON);
 		EnvironmentFrame.getInstance().addUnit(_frame, (int)pos.getX(), (int)pos.getY());
 		
@@ -178,6 +179,7 @@ public class Swarmodon extends Unit{
 		children.remove(aSwarmide);
 		aSwarmide = null;
 		System.gc();
+		Overmind.getInstance().updateStats();
 	}
 	
 	@Override
@@ -187,9 +189,10 @@ public class Swarmodon extends Unit{
 	
 	@Override
 	protected synchronized void destroyUnit(){
-		for (Swarmide s2 : children)
-		{
-			s2.destroyUnit();
+		for(int j=0;j<children.size();j++){
+			if(children.get(j) != null){
+				children.get(j).destroyUnit();
+			}
 		}
 		EnvironmentFrame.getInstance().removeSwarm(this);
 		boss.destroyChild(this);

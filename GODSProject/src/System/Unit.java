@@ -14,6 +14,7 @@ public abstract class Unit extends Agent {
 	protected String unitType;
 	protected UnitFrame _frame;
 	protected int _detectionThreshold;
+	protected Unit _target;
 	
 	Unit(Vector2 pos)
 	{
@@ -117,9 +118,10 @@ public abstract class Unit extends Agent {
 		}
 	}
 	
-	synchronized public void takesDmg(int aDmgAmount){
-		life--;
+	public void takesDmg(int aDmgAmount){
+		life = life - aDmgAmount;
 		if(life <= 0){
+			isAlive = false;
 			defeated();
 		}
 	}

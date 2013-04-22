@@ -14,7 +14,12 @@ enum TerranodonState implements State{
 			ArrayList<Unit> ennemies = u.watchSurroundingsT();
 			if (ennemies != null)
 			{
-				((Terranodon)u).changeState(Attack);
+				//((Terranodon)u).changeState(Attack);
+				
+				if(((Terranodon)u).isCloseEnoughTo(((Terranodon)u).goal)){		
+					ennemies.get(0).takesDmg(3);
+				}
+				
 				u.setGoal(ennemies.get(0).getPos());
 				u.moveTo(u.getGoal());
 			}
@@ -46,7 +51,7 @@ enum TerranodonState implements State{
 	GoingTo {
 		public void act(Unit u)
 		{
-			if (u.getPos().equals(u.getGoal()))
+			if (u.isCloseEnoughTo(u.getGoal()))
 				((Terranodon)u).changeState(Roam);
 			else
 				u.moveTo(u.getGoal());
@@ -62,6 +67,7 @@ public class Terranodon extends Unit {
 	{
 		super(pos);
 		
+		life = 1000;
 		_frame = new UnitFrame(VisualType.TERANODON);
 		EnvironmentFrame.getInstance().addUnit(_frame, (int)pos.getX(), (int)pos.getY());
 		
@@ -76,7 +82,7 @@ public class Terranodon extends Unit {
 	@Override
 	public synchronized void defeated(){
 		EnvironmentFrame.getInstance().addEnergyFromDefeatedTeran(this);
-		//EnvironmentFrame.getInstance().destroyTeranUnit(this);
+		EnvironmentFrame.getInstance().destroyTeranUnit(this);
 	}
 	
 	@Override

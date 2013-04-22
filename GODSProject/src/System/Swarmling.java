@@ -16,16 +16,14 @@ enum SwarmlingState implements State
 			ArrayList<Unit> ennemies = u.watchSurroundings();
 			if (ennemies != null)
 			{
-				Unit enemy = ennemies.get(0);
-				((Swarmling)u).changeState(Attack);
-				u.setGoal(enemy.getPos());
-				u.moveTo(u.getGoal());
+				//((Swarmide)u).changeState(Attack);
 				
-				if(((Swarmling)u).isCloseEnoughTo(u.getGoal())){		
-					enemy.takesDmg(1);
+				if(((Swarmling)u).isCloseEnoughTo(((Swarmling)u).goal)){		
+					ennemies.get(0).takesDmg(2);
 				}
 				
-				((Swarmling)u).changeState(Roam);
+				u.setGoal(ennemies.get(0).getPos());
+				u.moveTo(u.getGoal());
 			}
 			else
 			{
@@ -62,9 +60,7 @@ enum SwarmlingState implements State
 					Message m = new Message(TypeMessage.Loot, u.getGoal(), "Swarmide");
 					((Swarmling)u).sendMessagetoBoss(m);
 				}
-				
-				
-				
+
 			}
 		}
 	},
@@ -76,11 +72,12 @@ enum SwarmlingState implements State
 			{
 				((Swarmling)u).changeState(Attack);
 				u.setGoal(ennemies.get(0).getPos());
+				u._target = ennemies.get(0);
 				Message m = new Message(TypeMessage.EnnemyDetected, u.getGoal(), "Swarmide");
 				((Swarmling)u).sendMessagetoBoss(m);
 			}
 			
-			if (u.getPos().equals(u.getGoal()))
+			if (u.isCloseEnoughTo(u.getGoal()))
 				((Swarmling)u).changeState(Roam);
 			else
 				u.moveTo(u.getGoal());
@@ -112,8 +109,7 @@ enum SwarmlingState implements State
 						u.setGoal(foodPos);
 						u.moveTo(u.getGoal());
 					}
-					else{															//FOOD SOURCE DEPLETED		
-						//nullify last food source coord? 
+					else{															//FOOD SOURCE DEPLETED		 
 						((Swarmling)u).changeState(Roam);
 					}
 				}
@@ -142,6 +138,7 @@ public class Swarmling extends Unit{
 	Swarmling(Vector2 pos, Swarmide b)
 	{
 		super(pos);
+		life = 150;
 		_isCarryingFood = false;
 		_lastFoodSight = new Point(0,0);
 		_frame = new UnitFrame(VisualType.SWARMLING);
@@ -197,7 +194,7 @@ public class Swarmling extends Unit{
 			if (m.type == TypeMessage.Attack)
 			{
 				goal = m.position;
-				state = SwarmlingState.GoingTo;
+				state = SwarmlingState.Attack;
 			}
 			else if (m.type == TypeMessage.GoTo)
 			{

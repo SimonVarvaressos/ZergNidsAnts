@@ -158,11 +158,14 @@ public class EnvironmentFrame extends JPanel{
 		{
 			s.turnOff();
 			removeUnit(s.getFrame());
-			
-			s.defeated();
-			
 			s = null;
 		}
+		for (EnergyBall s : _energyList)
+		{
+			removeUnit(s.getFrame());
+			s = null;
+		}
+		_energyList.clear();
 		_terranList.clear();
 		_swarmList.clear();
 		System.gc();
@@ -204,15 +207,39 @@ public class EnvironmentFrame extends JPanel{
 	synchronized public void destroyTeranUnit(Unit aUnit){
 		aUnit.turnOff();
 		removeUnit(aUnit.getFrame());
-		System.out.println("Test: " + _terranList.remove(aUnit));
+		_terranList.remove(aUnit);
 		aUnit = null;
 		System.gc();
+	}
+	
+	synchronized public void removeEnergyBall(EnergyBall aEnergyBall){
+		_energyList.remove(aEnergyBall);
+		removeUnit(aEnergyBall.getFrame());
+		aEnergyBall = null;
 	}
 	
 	synchronized public boolean validFoodSource(Vector2 aLocation){
 		for(int i=0;i<_energyList.size();i++){
 			if((_energyList.get(i).getXi() == aLocation.getX())&&(_energyList.get(i).getYi() == aLocation.getY()))
 			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	synchronized public boolean validUnit(Unit aUnit){
+		for(int i=0;i<_swarmList.size();i++){
+			if(_swarmList.get(i) == aUnit)
+			{
+				System.out.println("its found!");
+				return true;
+			}
+		}
+		for(int j=0;j<_terranList.size();j++){
+			if(_terranList.get(j) == aUnit)
+			{
+				System.out.println("its found!");
 				return true;
 			}
 		}
@@ -228,12 +255,7 @@ public class EnvironmentFrame extends JPanel{
 			}
 		}
 	}
-	
-	
-	synchronized public void removeEnergyBall(EnergyBall aEnergyBall){
-		_energyList.remove(aEnergyBall);
-		removeUnit(aEnergyBall.getFrame());
-		aEnergyBall = null;
-	}
+		
+
 
 }

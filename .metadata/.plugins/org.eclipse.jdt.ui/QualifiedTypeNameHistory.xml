@@ -8,10 +8,7 @@
 <fullyQualifiedTypeName name="Constants"/>
 <fullyQualifiedTypeName name="System.Unit"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
-<fullyQualifiedTypeName name="Frame.EnvironmentFrame"/>
-<fullyQualifiedTypeName name="Frame.UnitVisual.UnitFrame"/>
 <fullyQualifiedTypeName name="java.awt.Component"/>
-<fullyQualifiedTypeName name="Frame.UnitVisual.VisualType"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="System.Vector2"/>
 <fullyQualifiedTypeName name="System.Constants"/>
@@ -19,4 +16,11 @@
 <fullyQualifiedTypeName name="Frame.OvermindFrame"/>
 <fullyQualifiedTypeName name="javax.swing.Timer"/>
 <fullyQualifiedTypeName name="System.Overmind"/>
+<fullyQualifiedTypeName name="Frame.UnitVisual.UnitFrame"/>
+<fullyQualifiedTypeName name="Frame.UnitVisual.VisualType"/>
+<fullyQualifiedTypeName name="System.EnergyBall"/>
+<fullyQualifiedTypeName name="System.Terranling"/>
+<fullyQualifiedTypeName name="System.Terranide"/>
+<fullyQualifiedTypeName name="java.awt.Point"/>
+<fullyQualifiedTypeName name="Frame.EnvironmentFrame"/>
 </qualifiedTypeNameHistroy>
