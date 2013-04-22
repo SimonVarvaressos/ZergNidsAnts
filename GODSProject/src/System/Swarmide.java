@@ -137,5 +137,20 @@ public class Swarmide extends Unit{
 		}
 	}
 
-
+	public void destroyChild(Swarmling aSwarmling){
+		aSwarmling.isAlive = false;
+		EnvironmentFrame.getInstance().removeUnit(aSwarmling._frame);
+		children.remove(aSwarmling);
+		aSwarmling = null;
+		System.gc();
+	}
+	
+	@Override
+	protected void destroyUnit(){
+		for (Swarmling s2 : children)
+		{
+			s2.destroyUnit();
+		}
+		boss.destroyChild(this);
+	}
 }

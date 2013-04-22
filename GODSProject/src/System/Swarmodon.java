@@ -138,5 +138,21 @@ public class Swarmodon extends Unit{
 		}
 		
 	}
-
+	
+	public void destroyChild(Swarmide aSwarmide){
+		aSwarmide.isAlive = false;
+		EnvironmentFrame.getInstance().removeUnit(aSwarmide._frame);
+		children.remove(aSwarmide);
+		aSwarmide = null;
+		System.gc();
+	}
+	
+	@Override
+	protected void destroyUnit(){
+		for (Swarmide s2 : children)
+		{
+			s2.destroyUnit();
+		}
+		boss.destroyChild(this);
+	}
 }

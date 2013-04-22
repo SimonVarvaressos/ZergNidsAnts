@@ -68,5 +68,6 @@ public abstract class Unit extends Agent {
 	public int getYi(){
 		return (int)position.getY();
 	}
-	
+
+	protected abstract void destroyUnit();
 }

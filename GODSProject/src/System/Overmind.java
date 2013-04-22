@@ -18,7 +18,7 @@ public class Overmind extends Unit{
 	Overmind(Vector2 pos)
 	{
 		super(pos);
-		energy = 7005;
+		energy = 10000;
 		life = 3000;
 		_frame = new UnitFrame(VisualType.OVERMIND);
 		EnvironmentFrame.getInstance().addUnit(_frame, (int)pos.getX(), (int)pos.getY());
@@ -262,6 +262,14 @@ public class Overmind extends Unit{
 		StatisticFrame.getInstance().updateUpkeep((children.size() * 10 + i * 5 + j * 2));
 	}
 	
+	public void destroyChild(Swarmodon aSwarmodon){
+		aSwarmodon.isAlive = false;
+		EnvironmentFrame.getInstance().removeUnit(aSwarmodon._frame);
+		children.remove(aSwarmodon);
+		aSwarmodon = null;
+		System.gc();
+	}
+	
 	protected void checkMessages()
 	{
 		
@@ -286,4 +294,8 @@ public class Overmind extends Unit{
 		
 	}
 
+	@Override
+	protected void destroyUnit(){
+		
+	}
 }

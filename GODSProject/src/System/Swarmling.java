@@ -1,5 +1,6 @@
 package System;
 import java.util.Random;
+import java.util.Vector;
 
 import Frame.EnvironmentFrame;
 import Frame.UnitVisual.UnitFrame;
@@ -108,5 +109,9 @@ public class Swarmling extends Unit{
 	{
 		boss.receiveMessage(m);
 	}
-
+	
+	@Override
+	protected void destroyUnit(){
+		boss.destroyChild(this);
+	}
 }

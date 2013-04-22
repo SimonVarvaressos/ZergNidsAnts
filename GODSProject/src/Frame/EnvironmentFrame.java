@@ -118,4 +118,12 @@ public class EnvironmentFrame extends JPanel{
 		_field.repaint();
 	}
 	
+	synchronized public void destroyTeranUnit(Unit aUnit){
+		aUnit.turnOff();
+		removeUnit(aUnit.getFrame());
+		_terranList.remove(aUnit);
+		aUnit = null;
+		System.gc();
+	}
+	
 }

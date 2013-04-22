@@ -56,6 +56,11 @@ public class Terranling extends Unit {
 	}
 
 	@Override
+	protected void destroyUnit(){
+		EnvironmentFrame.getInstance().destroyTeranUnit(this);
+	}
+	
+	@Override
 	protected void checkMessages() {
 		// TODO Auto-generated method stub
 		
