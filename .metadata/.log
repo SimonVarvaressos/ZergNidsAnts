@@ -4503,3 +4503,12 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64
 
 !ENTRY org.eclipse.ui 4 4 2013-04-22 19:22:48.954
 !MESSAGE Unable to find Action Set: org.eclipse.wb.core.ui.actionset
+!SESSION 2013-04-23 08:47:00.398 -----------------------------------------------
+eclipse.buildId=M20120914-1800
+java.version=1.7.0_17
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.ui 4 4 2013-04-23 08:47:10.819
+!MESSAGE Unable to find Action Set: org.eclipse.wb.core.ui.actionset

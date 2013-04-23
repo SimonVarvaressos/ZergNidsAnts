@@ -58,14 +58,15 @@ enum SwarmideState implements State{
 			{
 				((Swarmide)u).changeState(Attack);
 				u.setGoal(ennemies.get(0).getPos());
-				Message m = new Message(TypeMessage.EnnemyDetected, u.getGoal(), "Swarmodon");
-				((Swarmide)u).sendMessagetoBoss(m);
+				//Message m = new Message(TypeMessage.EnnemyDetected, u.getGoal(), "Swarmodon");
+				//((Swarmide)u).sendMessagetoBoss(m);
 			}
-			
-			if (u.isCloseEnoughTo(u.getGoal()))
-				((Swarmide)u).changeState(Roam);
-			else
-				u.moveTo(u.getGoal());
+			else{
+				if (u.isCloseEnoughTo(u.getGoal()))
+					((Swarmide)u).changeState(Roam);
+				else
+					u.moveTo(u.getGoal());
+			}
 		}
 	}
 }
@@ -134,7 +135,7 @@ public class Swarmide extends Unit{
 			if (m.type == TypeMessage.Attack)
 			{
 				goal = m.position;
-				state = SwarmideState.Attack;
+				state = SwarmideState.GoingTo;
 			}
 			else if (m.type == TypeMessage.GoTo)
 			{

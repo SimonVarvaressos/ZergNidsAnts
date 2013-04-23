@@ -73,15 +73,16 @@ enum SwarmlingState implements State
 				((Swarmling)u).changeState(Attack);
 				u.setGoal(ennemies.get(0).getPos());
 				u._target = ennemies.get(0);
-				Message m = new Message(TypeMessage.EnnemyDetected, u.getGoal(), "Swarmide");
-				((Swarmling)u).sendMessagetoBoss(m);
+				//Message m = new Message(TypeMessage.EnnemyDetected, u.getGoal(), "Swarmide");
+				//((Swarmling)u).sendMessagetoBoss(m);
 			}
-			
-			if (u.isCloseEnoughTo(u.getGoal()))
-				((Swarmling)u).changeState(Roam);
 			else
-				u.moveTo(u.getGoal());
-			
+			{
+				if (u.isCloseEnoughTo(u.getGoal()))
+					((Swarmling)u).changeState(Roam);
+				else
+					u.moveTo(u.getGoal());
+			}
 			//System.out.println(u.getGoal().getX() + " and " + u.getGoal().getY());
 		}
 	},
@@ -194,12 +195,14 @@ public class Swarmling extends Unit{
 			if (m.type == TypeMessage.Attack)
 			{
 				goal = m.position;
-				state = SwarmlingState.Attack;
+				state = SwarmlingState.GoingTo;
 			}
 			else if (m.type == TypeMessage.GoTo)
 			{
-				goal = m.position;
-				state = SwarmlingState.GoingTo;
+				if(state != SwarmlingState.Attack){
+					goal = m.position;
+					state = SwarmlingState.GoingTo;
+				}
 			}
 			else if (m.type == TypeMessage.Loot)
 			{
