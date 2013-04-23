@@ -173,10 +173,16 @@ public class Swarmide extends Unit{
 	
 	protected void sendMessageToSwarmlings(Message m)
 	{
-		for(Swarmling s : children)
-		{
-			s.receiveMessage(m);
+		for(int j=0;j<children.size();j++){
+			if(children.get(j) != null){
+				children.get(j).receiveMessage(m);
+			}
 		}
+	}
+	
+	@Override
+	public int getValue(){
+		return 350;
 	}
 	
 	protected void sendMessagetoBoss(Message m)

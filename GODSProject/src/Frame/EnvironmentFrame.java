@@ -171,7 +171,29 @@ public class EnvironmentFrame extends JPanel{
 		System.gc();
 	}
 	
+	public synchronized int swarmicide(){
+		int temp = 0;
+		
+		for(int j=0;j<_swarmList.size();j++){
+			if(_swarmList.get(j) != null){
+				_swarmList.get(j).turnOff();
+				removeUnit(_swarmList.get(j).getFrame());
+				temp = temp + _swarmList.get(j).getValue();
+				_swarmList.clear();
+			}
+		}
+		return temp;
+	}
+	
 	synchronized public void clearSwarm(){
+		
+		for(int j=0;j<_swarmList.size();j++){
+			if(_swarmList.get(j) != null){
+				_swarmList.get(j).turnOff();
+				removeUnit(_swarmList.get(j).getFrame());
+			}
+		}
+		
 		_swarmList.clear();
 	}
 	

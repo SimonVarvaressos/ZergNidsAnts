@@ -11,17 +11,17 @@ public class Constants {
 	public static final int swarmidesMax = 3;
 	public static final int swarmodonsMax = 4;
 	
-	public static final float swarmlingSpeed = 1.0f;
-	public static final float swarmideSpeed = 0.5f;
+	public static final float swarmlingSpeed = 1.3f;
+	public static final float swarmideSpeed = 0.8f;
 	public static final float swarmodonSpeed = 0.25f;
 	
 	public static final float terranlingSpeed = 0.9f;
 	public static final float terranideSpeed = 0.5f;
 	public static final float terranodonSpeed = 0.2f;
 	
-	public static final int swarmlingCost = 200;
-	public static final int swarmideCost = 750;
-	public static final int swarmodonCost = 3500;
+	public static final int swarmlingCost = 50;
+	public static final int swarmideCost = 400;
+	public static final int swarmodonCost = 1500;
 	
 	public static final String NO_ENERGY = "Insufficient energy";
 	

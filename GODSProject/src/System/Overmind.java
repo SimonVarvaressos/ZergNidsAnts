@@ -151,7 +151,7 @@ public class Overmind extends Unit{
 			}
 			i = i + theSwarmides.size();
 		}
-		return energy + children.size() * 2250 + i * 500 + j * 150;
+		return energy + children.size() * 1000 + i * 300 + j * 30;
 	}
 	
 	public void swarmicide() {
@@ -167,15 +167,15 @@ public class Overmind extends Unit{
 				for (Swarmling s3 : theSwarmlings)
 				{
 					s3.isAlive = false;
-					EnvironmentFrame.getInstance().removeUnit(s3._frame);
+					//EnvironmentFrame.getInstance().removeUnit(s3._frame);
 					s3 = null;
 				}
 				s2.isAlive = false;
-				EnvironmentFrame.getInstance().removeUnit(s2._frame);
+				//EnvironmentFrame.getInstance().removeUnit(s2._frame);
 				s2 = null;
 			}
 			s.isAlive = false;
-			EnvironmentFrame.getInstance().removeUnit(s._frame);
+			//EnvironmentFrame.getInstance().removeUnit(s._frame);
 			s = null;
 		}
 		children.clear();
@@ -183,6 +183,7 @@ public class Overmind extends Unit{
 		System.gc();
 		
 		StatisticFrame.getInstance().updateSwarm(0, 0, 0);
+		setUpkeep();
 		OvermindFrame.getInstance().updateEnergy(energy);
 		OvermindFrame.getInstance().updateMsg("Swarmicide committed");
 	}
@@ -200,24 +201,23 @@ public class Overmind extends Unit{
 				for (Swarmling s3 : theSwarmlings)
 				{
 					s3.isAlive = false;
-					EnvironmentFrame.getInstance().removeUnit(s3._frame);
+					//EnvironmentFrame.getInstance().removeUnit(s3._frame);
 					s3 = null;
 				}
 				s2.isAlive = false;
-				EnvironmentFrame.getInstance().removeUnit(s2._frame);
+				//EnvironmentFrame.getInstance().removeUnit(s2._frame);
 				s2 = null;
 			}
 			s.isAlive = false;
-			EnvironmentFrame.getInstance().removeUnit(s._frame);
+			//EnvironmentFrame.getInstance().removeUnit(s._frame);
 			s = null;
 		}
 		children.clear();
+		EnvironmentFrame.getInstance().clearSwarm();
 		System.gc();
-		
-		
-		
+
 		StatisticFrame.getInstance().updateAllData(0, 0, 0, 0, 5.0f);
-		OvermindFrame.getInstance().updateHP(3000);
+		//OvermindFrame.getInstance().updateHP(3000);
 		OvermindFrame.getInstance().updateEnergy(energy);
 		OvermindFrame.getInstance().updateMsg(" No message at the moment ");
 	}
@@ -290,9 +290,10 @@ public class Overmind extends Unit{
 
 	protected void sendMessageToSwarmodons(Message m)
 	{
-		for(Swarmodon s : children)
-		{
-			s.receiveMessage(m);
+		for(int j=0;j<children.size();j++){
+			if(children.get(j) != null){
+				children.get(j).receiveMessage(m);
+			}
 		}
 	}
 

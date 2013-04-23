@@ -72,7 +72,7 @@ public class OvermindFrame extends JPanel{
 		
 		_lblHP.setText(TXT_HP);
 		_lblActualHP.setAlignment(Label.CENTER);
-		_lblActualHP.setText(String.valueOf(INIT_HP));
+		_lblActualHP.setText("Infinite");
 		
 		_lblEnergy.setText(TXT_ENERGY);
 		_lblActualEnergy.setAlignment(Label.CENTER);

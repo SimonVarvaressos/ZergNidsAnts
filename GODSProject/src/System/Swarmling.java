@@ -214,6 +214,11 @@ public class Swarmling extends Unit{
 	}
 
 	@Override
+	public int getValue(){
+		return 50;
+	}
+	
+	@Override
 	protected void act() {
 		if (state != null)
 		{

@@ -165,13 +165,17 @@ public class Swarmodon extends Unit{
 	
 	protected void sendMessageToSwarmides(Message m)
 	{
-		for(Swarmide s : children)
-		{
-			s.receiveMessage(m);
+		for(int j=0;j<children.size();j++){
+			if(children.get(j) != null){
+				children.get(j).receiveMessage(m);
+			}
 		}
 	}
 	
-	
+	@Override
+	public int getValue(){
+		return 1250;
+	}
 	
 	public void destroyChild(Swarmide aSwarmide){
 		aSwarmide.isAlive = false;

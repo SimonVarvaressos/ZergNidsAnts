@@ -126,6 +126,9 @@ public abstract class Unit extends Agent {
 		}
 	}
 	
+	public int getValue(){
+		return 0;
+	}
 	public abstract void defeated();
 	protected abstract void destroyUnit();
 }
